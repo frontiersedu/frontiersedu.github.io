@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontiers Education – Global Experiential Learning for Students</title>
+<meta name="description" content="Frontiers Education offers world-class enrichment programmes for school students, including the World Scholar's Cup — India's exclusive partner.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ── HOME-SPECIFIC ── */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; position: relative; overflow: hidden;
+  padding: calc(var(--nav-h) + 60px) 5vw 80px;
+  gap: 4rem;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-slide {
+  position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease;
+}
+.hero-slide.active { opacity: 1; }
+.hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+.hero-slide::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(110deg, rgba(10,22,40,0.93) 0%, rgba(10,22,40,0.75) 50%, rgba(10,22,40,0.55) 100%);
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  background: rgba(232,160,32,0.14); border: 1px solid rgba(232,160,32,0.35);
+  color: var(--gold); font-size: 0.76rem; font-weight: 700;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  padding: 0.38rem 1rem; border-radius: 2px; margin-bottom: 1.8rem;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-badge::before { content: '✦'; font-size: 0.65rem; }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+  font-weight: 900; color: var(--white); line-height: 1.08;
+  margin-bottom: 1.4rem;
+  animation: fadeUp 0.8s 0.12s ease both;
+}
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-sub {
+  font-size: 1.05rem; color: rgba(255,255,255,0.7);
+  line-height: 1.78; max-width: 500px; font-weight: 300;
+  margin-bottom: 2.2rem;
+  animation: fadeUp 0.8s 0.24s ease both;
+}
+.hero-actions { animation: fadeUp 0.8s 0.36s ease both; }
+
+.hero-stats {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+  animation: fadeUp 0.8s 0.48s ease both;
+  align-content: center;
+}
+.hstat {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px; padding: 1.8rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+.hstat:hover { background: rgba(255,255,255,0.1); border-color: rgba(232,160,32,0.3); transform: translateY(-4px); }
+.hstat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem; font-weight: 900;
+  color: var(--gold); line-height: 1; margin-bottom: 0.4rem;
+}
+.hstat-label { color: rgba(255,255,255,0.58); font-size: 0.84rem; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Intro two-col */
+.intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.intro-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.intro-photos .tall { grid-row: span 2; }
+.intro-photo { border-radius: 6px; overflow: hidden; }
+.intro-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+.intro-photo:hover img { transform: scale(1.06); }
+.intro-photo-1 { aspect-ratio: auto; min-height: 200px; }
+.intro-photo-2 { aspect-ratio: 4/3; }
+.intro-photo-3 { aspect-ratio: 4/3; }
+.intro-badge {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  background: var(--navy); color: var(--white);
+  padding: 1rem 1.4rem; border-radius: 4px; margin-top: 1.5rem;
+  border-left: 4px solid var(--gold);
+  box-shadow: 0 10px 36px rgba(10,22,40,0.18);
+  font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
+}
+.intro-badge span { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--gold); font-weight: 600; display: block; margin-bottom: 0.1rem; }
+.partner-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+.ptag {
+  background: var(--light); border: 1px solid var(--border);
+  color: var(--navy); font-size: 0.8rem; font-weight: 500;
+  padding: 0.4rem 0.9rem; border-radius: 2px; transition: all 0.2s;
+}
+.ptag:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding-top: calc(var(--nav-h) + 40px); }
+  .hero-stats { margin-top: 2rem; }
+  .intro-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="images/frontier-logo.png" alt="Frontiers Education">
+  </a>
+    <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="wsc.html">World Scholar's Cup</a></li>
+    <li><a href="about.html">Our Story</a></li>
+    <li><a href="team.html">Our Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Enquire Now</a>
+  <div class="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="wsc.html">World Scholar's Cup</a>
+  <a href="about.html">Our Story</a>
+  <a href="team.html">Our Team</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="m-cta">Enquire Now</a>
+</nav>
+
+<div class="page-wrap">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-slide active"><img src="images/wsc-celebration.webp" alt="WSC Celebration" loading="eager"></div>
+    <div class="hero-slide"><img src="images/wsc-community.webp" alt="Global Community" loading="lazy"></div>
+    <div class="hero-slide"><img src="images/wsc-toc.webp" alt="Tournament of Champions" loading="lazy"></div>
+    <div class="hero-slide"><img src="images/frontiers-wsc1.jpg" alt="Frontiers WSC Students" loading="lazy"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">India's Exclusive WSC Partner</div>
+    <h1>Learning that<br><em>Transforms</em><br>Young Minds</h1>
+    <p class="hero-sub">Frontiers Education brings world-class enrichment experiences to school students across India — practical, inspiring programmes that go far beyond the classroom.</p>
+    <div class="hero-actions btn-row">
+      <a href="wsc.html" class="btn btn-primary">World Scholar's Cup</a>
+      <a href="about.html" class="btn btn-outline">Our Story</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-num count-up" data-target="5000" data-suffix="+">5,000+</div>
+      <div class="hstat-label">Students reached across India</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num count-up" data-target="200" data-suffix="+">200+</div>
+      <div class="hstat-label">Participating schools in India</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num count-up" data-target="12" data-suffix="">12</div>
+      <div class="hstat-label">Regional rounds across India</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num count-up" data-target="70" data-suffix="+">70+</div>
+      <div class="hstat-label">Countries in WSC globally</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ INTRO ═══ -->
+<section class="section section--white" id="about">
+  <div class="intro-grid">
+    <div class="reveal">
+      <div class="intro-photos">
+        <div class="intro-photo tall intro-photo-1" style="min-height:420px">
+          <img src="images/wsc-debate.webp" alt="WSC Debate" loading="lazy">
+        </div>
+        <div class="intro-photo intro-photo-2">
+          <img src="images/wsc-bowl.webp" alt="Scholar's Bowl" loading="lazy">
+        </div>
+        <div class="intro-photo intro-photo-3">
+          <img src="images/wsc-countries.webp" alt="Global Community" loading="lazy">
+        </div>
+      </div>
+      <div class="intro-badge">
+        <div>
+          <span>Exclusive Partner</span>
+          World Scholar's Cup — India
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="transition-delay:0.18s">
+      <div class="section-tag">Who We Are</div>
+      <h2 class="section-title">Where the Classroom Meets the World</h2>
+      <p class="section-sub">Founded in 2010, Frontiers Education has grown to become India's premier WSC partner — working with 200+ schools, running 12 regional rounds, and reaching 5,000+ students across India every year.</p>
+      <p class="section-sub" style="margin-top:1rem">Our diverse team — with experience spanning management, engineering, education and travel — makes every detail effortless, from visas and flights to on-the-ground support.</p>
+      <div class="partner-tags" style="margin-top:1.5rem">
+        <span class="ptag">🌍 World Scholar's Cup</span>
+        </div>
+      <div class="btn-row">
+        <a href="about.html" class="btn btn-dark">Learn About Us</a>
+        <a href="team.html" class="arrow-link">Meet the Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ WSC HIGHLIGHT ═══ -->
+<section class="section section--dark" id="wsc">
+  <div style="text-align:center; max-width:720px; margin:0 auto 4rem;" class="reveal">
+    <div class="section-tag section-tag--light">Featured Programme</div>
+    <h2 class="section-title section-title--light">The World Scholar's Cup</h2>
+    <p class="section-sub section-sub--light">Each year thousands of students on six continents celebrate learning, creativity, and friendship through the World Scholar's Cup — the world's most inclusive academic competition. Frontiers is the exclusive India partner.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a href="wsc.html" class="btn btn-primary">Explore the Programme</a>
+    </div>
+  </div>
+
+  <div class="photo-grid-4 reveal" style="transition-delay:0.15s">
+    <div class="photo-item"><img src="images/wsc-celebration.webp" alt="Celebration" loading="lazy"></div>
+    <div class="photo-item"><img src="images/wsc-debate.webp" alt="Team Debate" loading="lazy"></div>
+    <div class="photo-item"><img src="images/wsc-bowl.webp" alt="Scholar's Bowl" loading="lazy"></div>
+    <div class="photo-item"><img src="images/wsc-toc.webp" alt="Yale Tournament of Champions" loading="lazy"></div>
+  </div>
+
+  <div class="stats-row" style="margin-top:4rem">
+    <div class="stat-item reveal"><div class="stat-num">5,000+</div><div class="stat-label">Students reached in India</div></div>
+    <div class="stat-item reveal" style="transition-delay:0.08s"><div class="stat-num">200+</div><div class="stat-label">Participating schools in India</div></div>
+    <div class="stat-item reveal" style="transition-delay:0.16s"><div class="stat-num">12</div><div class="stat-label">Regional rounds across India</div></div>
+    <div class="stat-item reveal" style="transition-delay:0.24s"><div class="stat-num">70+</div><div class="stat-label">Countries in WSC globally</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ ADVANTAGES ═══ -->
+<section class="section section--mid">
+  <div style="max-width:600px; margin-bottom:3.5rem;" class="reveal">
+    <div class="section-tag section-tag--light">Why Choose Frontiers</div>
+    <h2 class="section-title section-title--light">The Frontiers Advantage</h2>
+  </div>
+  <div class="adv-grid">
+    <div class="adv-card reveal">
+      <div class="adv-icon">🎓</div>
+      <div class="adv-text">
+        <h4>Learning For A Lifetime</h4>
+        <p>All Frontiers programmes are educational at their core. Students expand their minds, discover hidden talents, and build confidence that lasts long after the programme ends.</p>
+      </div>
+    </div>
+    <div class="adv-card reveal" style="transition-delay:0.08s">
+      <div class="adv-icon">🌐</div>
+      <div class="adv-text">
+        <h4>Global Connections</h4>
+        <p>Students forge lifelong friendships with peers from 70+ countries — a global network that enriches their lives personally and professionally for decades.</p>
+      </div>
+    </div>
+    <div class="adv-card reveal" style="transition-delay:0.16s">
+      <div class="adv-icon">✈️</div>
+      <div class="adv-text">
+        <h4>Stress-Free Experience</h4>
+        <p>Every detail is handled by our expert team — visas, flights, hotels, local transport, meals. Parents and students can focus entirely on the experience.</p>
+      </div>
+    </div>
+    <div class="adv-card reveal" style="transition-delay:0.24s">
+      <div class="adv-icon">🛡️</div>
+      <div class="adv-text">
+        <h4>Safety First, Always</h4>
+        <p>Rigorous safety protocols, expert tour directors, and comprehensive emergency planning ensure every student is safe, supported, and cared for throughout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CONTACT STRIP ═══ -->
+<section class="section section--white" style="text-align:center">
+  <div class="reveal">
+    <div class="section-tag" style="justify-content:center">Get Started</div>
+    <h2 class="section-title" style="margin-bottom:1rem">Ready to Begin the Journey?</h2>
+    <p class="section-sub" style="margin:0 auto 2rem">Contact our team and we will help you find the right programme for your child.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a href="contact.html" class="btn btn-primary">Contact Us</a>
+      <a href="team.html" class="btn btn-dark">Meet Our Team</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/frontier-logo.png" alt="Frontiers Education Logo">
+      <p>Global experiential learning programmes designed to supplement school education through practical experiences that teach, motivate, and inspire children to discover their passions.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Programme</h5>
+      <ul>
+        <li><a href="wsc.html">World Scholar's Cup</a></li>
+        <li><a href="wsc.html#events">The Four Events</a></li>
+        <li><a href="wsc.html#toc">Tournament of Champions</a></li>
+        <li><a href="wsc.html#subjects">Subjects</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>About</h5>
+      <ul>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="about.html#values">Values</a></li>
+        <li><a href="about.html#partners">Partners</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="contact.html">Get In Touch</a></li>
+        <li><a href="tel:+917303720011">+91 73037 20011</a></li>
+        <li><a href="mailto:info@frontiersedu.com">info@frontiersedu.com</a></li>
+        <li><a href="contact.html">Gurgaon — NCR</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Frontiers Education. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#" title="Facebook">f</a>
+      <a href="#" title="LinkedIn">in</a>
+      <a href="#" title="Instagram">ig</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /page-wrap -->
+<script src="js/main.js"></script>
+</body>
+</html>
