@@ -91,7 +91,7 @@ a { text-decoration: none; color: inherit; }
   display: flex; align-items: center; gap: 0.7rem;
   flex-shrink: 0; margin-right: 2.5rem;
 }
-.nav-logo img { height: 40px; width: auto; object-fit: contain; }
+.nav-logo img { height: 44px; width: auto; object-fit: contain; background: #ffffff; border-radius: 4px; padding: 3px 8px; }
 .nav-logo-text {
   font-family: 'Playfair Display', serif;
   color: var(--gold); font-size: 1.15rem; font-weight: 700;
@@ -494,7 +494,7 @@ footer {
   padding-bottom: 3rem;
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
-.footer-brand img { height: 44px; margin-bottom: 1.1rem; }
+.footer-brand img { height: 56px; margin-bottom: 1.1rem; background: #ffffff; border-radius: 4px; padding: 4px 10px; }
 .footer-brand p { font-size: 0.87rem; color: rgba(255,255,255,0.45); line-height: 1.72; max-width: 300px; }
 .footer-col h5 {
   font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em;
