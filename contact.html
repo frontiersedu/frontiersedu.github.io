@@ -223,7 +223,7 @@
           <textarea placeholder="Tell us about your school, how many students you're interested in registering, any questions you have…"></textarea>
         </div>
 
-        <button class="btn-submit">Send Message</button>
+        <button class="btn-submit" id="contactSubmit" type="button">Send Message</button>
       </div>
     </div>
 
@@ -340,6 +340,46 @@ document.querySelectorAll('.faq-item h5').forEach(h => {
     document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
     if (!wasOpen) item.classList.add('open');
   });
+});
+
+// Contact form — mailto submit
+document.getElementById('contactSubmit').addEventListener('click', function () {
+  const get = id => (document.getElementById(id) || {}).value || '';
+
+  // Collect fields by order (no ids on fields, so grab by index)
+  const inputs = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea');
+  const firstName = inputs[0] ? inputs[0].value.trim() : '';
+  const lastName  = inputs[1] ? inputs[1].value.trim() : '';
+  const email     = inputs[2] ? inputs[2].value.trim() : '';
+  const phone     = inputs[3] ? inputs[3].value.trim() : '';
+  const role      = inputs[4] ? inputs[4].value.trim() : '';
+  const programme = inputs[5] ? inputs[5].value.trim() : '';
+  const message   = inputs[6] ? inputs[6].value.trim() : '';
+
+  if (!firstName || !email) {
+    alert('Please enter at least your First Name and Email before submitting.');
+    return;
+  }
+
+  const subject  = encodeURIComponent('Website Form by ' + firstName + ' ' + lastName);
+  const body     = encodeURIComponent(
+    'Name: ' + firstName + ' ' + lastName + '\n' +
+    'Email: ' + email + '\n' +
+    'Phone: ' + phone + '\n' +
+    'I am a: ' + role + '\n' +
+    'Programme of Interest: ' + programme + '\n\n' +
+    'Message:\n' + message
+  );
+
+  window.location.href = 'mailto:contact@frontiersedu.com?subject=' + subject + '&body=' + body;
+
+  // Visual feedback
+  this.textContent = '✓ Opening your email client...';
+  this.classList.add('sent');
+  setTimeout(() => {
+    this.textContent = 'Send Message';
+    this.classList.remove('sent');
+  }, 4000);
 });
 </script>
 </body>

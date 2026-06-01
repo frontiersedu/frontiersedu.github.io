@@ -7,108 +7,156 @@
 <meta name="description" content="Meet the dedicated team at Frontiers Education who make world-class learning experiences possible for thousands of Indian students every year.">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-/* ── TEAM PAGE SPECIFIC ── */
-.team-page-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
 
-.tm-card {
+/* ══ FOUNDER CARD ══ */
+.founder-card {
+  display: grid;
+  grid-template-columns: 300px 1fr;
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: 8px; overflow: hidden;
-  transition: all 0.32s;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 6px 28px rgba(10,22,40,0.09);
+  transition: box-shadow 0.3s;
 }
-.tm-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 50px rgba(10,22,40,0.13);
-  border-color: rgba(232,160,32,0.35);
+.founder-card:hover { box-shadow: 0 12px 48px rgba(10,22,40,0.14); }
+.founder-photo {
+  position: relative; overflow: hidden;
+  background: linear-gradient(165deg, var(--navy) 0%, #1a3a6e 100%);
+  min-height: 340px;
+}
+.founder-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top;
+  display: block;
+}
+.founder-placeholder {
+  width: 100%; height: 100%; min-height: 340px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.6rem;
+}
+.founder-placeholder .fi { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900; color: var(--gold); opacity: 0.7; }
+.founder-placeholder .fn { font-size: 0.72rem; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; text-transform: uppercase; }
+.founder-info {
+  padding: 2.5rem 2.8rem;
+  display: flex; flex-direction: column; justify-content: center;
+  border-left: 5px solid var(--gold);
+}
+.founder-info .role-tag {
+  font-size: 0.73rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
+}
+.founder-info h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 900; color: var(--navy);
+  margin-bottom: 1.1rem; line-height: 1.1;
+}
+.founder-info p {
+  font-size: 0.93rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.8rem;
+}
+.founder-info p:last-of-type { margin-bottom: 1.2rem; }
+.founder-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.founder-tags span {
+  background: var(--light); border: 1px solid var(--border);
+  font-size: 0.75rem; font-weight: 600; color: var(--navy);
+  padding: 0.3rem 0.75rem; border-radius: 2px;
 }
 
-.tm-photo {
-  aspect-ratio: 3/4;
-  background: linear-gradient(165deg, var(--navy) 0%, var(--blue) 100%);
-  position: relative; overflow: hidden;
+/* ══ TEAM STRIPS — 4-col: photo | text | photo | text ══ */
+.team-row {
+  display: grid;
+  grid-template-columns: 220px 1fr 220px 1fr;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--white);
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.3s;
 }
-.tm-photo img {
+.team-row:hover { box-shadow: 0 8px 36px rgba(10,22,40,0.1); }
+
+.tr-photo {
+  position: relative; overflow: hidden;
+  background: linear-gradient(165deg, var(--navy) 0%, #1a3a6e 100%);
+  min-height: 240px;
+}
+.tr-photo img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: top center;
-  transition: transform 0.5s;
+  display: block; transition: transform 0.5s;
 }
-.tm-card:hover .tm-photo img { transform: scale(1.05); }
+.team-row:hover .tr-photo img { transform: scale(1.04); }
 
-/* Placeholder shown when img fails to load or src is placeholder */
-.tm-placeholder {
-  width: 100%; height: 100%;
+.tr-placeholder {
+  width: 100%; height: 100%; min-height: 240px;
   display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 0.5rem;
-  background: linear-gradient(165deg, var(--navy) 0%, #1a3a6e 100%);
+  align-items: center; justify-content: center; gap: 0.5rem;
 }
-.tm-placeholder .initials {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem; font-weight: 900;
-  color: var(--gold); opacity: 0.75; line-height: 1;
-}
-.tm-placeholder .ph-note {
-  font-size: 0.68rem; color: rgba(255,255,255,0.3);
-  letter-spacing: 0.1em; text-transform: uppercase;
-}
+.tr-placeholder .ti { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--gold); opacity: 0.65; }
+.tr-placeholder .tn { font-size: 0.68rem; color: rgba(255,255,255,0.3); letter-spacing: 0.09em; text-transform: uppercase; }
 
-/* Photo overlay gradient */
-.tm-photo-overlay {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(10,22,40,0.85) 0%, transparent 60%);
-  padding: 2rem 1.2rem 1rem;
-  opacity: 0; transition: opacity 0.3s;
+.tr-text {
+  padding: 1.8rem 1.8rem;
+  display: flex; flex-direction: column; justify-content: center;
+  border-left: 1px solid var(--border);
 }
-.tm-card:hover .tm-photo-overlay { opacity: 1; }
-.tm-photo-quote {
-  color: rgba(255,255,255,0.75); font-style: italic;
-  font-size: 0.8rem; line-height: 1.5;
+/* Gold accent divider between the two pairs */
+.tr-photo + .tr-text + .tr-photo {
+  border-left: 3px solid var(--gold);
 }
-
-.tm-body { padding: 1.4rem 1.4rem 1.6rem; }
-.tm-body h3 {
+.tr-text + .tr-photo {
+  border-left: 3px solid var(--gold);
+}
+.tr-text h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.15rem; font-weight: 700; color: var(--navy);
-  margin-bottom: 0.2rem;
+  font-size: 1.12rem; font-weight: 700; color: var(--navy); margin-bottom: 0.2rem;
 }
-.tm-role {
+.tr-role {
   display: block; font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 0.8rem;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.7rem;
 }
-.tm-body p { font-size: 0.85rem; color: var(--muted); line-height: 1.68; }
-.tm-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
-.tm-tag {
+.tr-text p { font-size: 0.86rem; color: var(--muted); line-height: 1.7; margin-bottom: 0.8rem; }
+.tr-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tr-tags span {
   background: var(--light); border: 1px solid var(--border);
-  color: var(--muted); font-size: 0.72rem; font-weight: 600;
+  font-size: 0.72rem; font-weight: 600; color: var(--muted);
   padding: 0.25rem 0.6rem; border-radius: 2px;
 }
 
-/* Photo instructions box */
-.photo-instructions {
+/* ══ PHOTO INSTRUCTIONS ══ */
+.photo-note {
   background: #fffbf0; border: 1.5px dashed var(--gold);
-  border-radius: 6px; padding: 1.2rem 1.5rem;
-  display: flex; gap: 1rem; align-items: flex-start;
-  margin-bottom: 3rem;
+  border-radius: 6px; padding: 1rem 1.4rem;
+  display: flex; gap: 0.9rem; align-items: flex-start;
+  margin-bottom: 2.2rem; font-size: 0.84rem; color: var(--muted);
 }
-.photo-instructions .pi-icon { font-size: 1.5rem; flex-shrink: 0; }
-.photo-instructions h4 { font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
-.photo-instructions p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
-.photo-instructions code {
-  display: inline-block; background: rgba(10,22,40,0.07);
-  border-radius: 2px; padding: 0.1rem 0.4rem;
-  font-family: monospace; font-size: 0.8rem; color: var(--navy);
-}
+.photo-note strong { color: var(--navy); }
+.photo-note code { background: rgba(10,22,40,0.07); border-radius: 2px; padding: 0.1rem 0.4rem; font-size: 0.8rem; }
 
+/* ══ RESPONSIVE ══ */
 @media (max-width: 1000px) {
-  .team-page-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-row { grid-template-columns: 180px 1fr 180px 1fr; }
 }
-@media (max-width: 580px) {
-  .team-page-grid { grid-template-columns: 1fr; }
+@media (max-width: 760px) {
+  .founder-card { grid-template-columns: 1fr; }
+  .founder-photo { min-height: 220px; }
+  .founder-placeholder { min-height: 220px; }
+  .team-row { grid-template-columns: 140px 1fr; }
+  .team-row .tr-photo:nth-child(3),
+  .team-row .tr-text:nth-child(4) {
+    grid-column: span 1;
+    border-top: 3px solid var(--gold);
+  }
+  .team-row .tr-photo:nth-child(3) { border-left: none; }
+}
+@media (max-width: 520px) {
+  .team-row { grid-template-columns: 1fr; }
+  .tr-photo { min-height: 180px; border-left: none !important; }
+  .tr-placeholder { min-height: 180px; }
+  .tr-text { border-left: none; border-top: 1px solid var(--border); }
+  .founder-info { padding: 1.5rem; }
 }
 </style>
 </head>
@@ -118,7 +166,7 @@
   <a href="index.html" class="nav-logo">
     <img src="assets/images/frontier-logo.png" alt="Frontiers Education">
   </a>
-    <ul class="nav-links">
+  <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="wsc.html">World Scholar's Cup</a></li>
     <li><a href="about.html">Our Story</a></li>
@@ -139,7 +187,7 @@
 
 <div class="page-wrap">
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 <div class="page-hero">
   <div class="page-hero-inner">
     <div class="section-tag">The People Behind It All</div>
@@ -150,195 +198,187 @@
 
 <div class="divider"></div>
 
-<!-- ═══ TEAM GRID ═══ -->
+<!-- TEAM SECTION -->
 <section class="section section--light">
 
   <!-- Photo instructions -->
-  <div class="photo-instructions reveal">
-    <div class="pi-icon">📸</div>
+  <div class="photo-note reveal">
+    <span>📸</span>
     <div>
-      <h4>Adding Team Photos</h4>
-      <p>To add a photo for any team member, save the image file to the <code>images/</code> folder with the filename shown below each card, then replace the placeholder image src in <code>team.html</code>. Recommended size: <strong>600 × 800 px</strong> (portrait), JPG or PNG. The images will automatically fill the card with face at top.</p>
+      <strong>Adding photos:</strong> Save each photo to <code>assets/images/</code> using the filename shown on the card.
+      Recommended size: <strong>600 &times; 800 px</strong> portrait JPG, face in the upper half.
     </div>
   </div>
 
-  <div class="team-page-grid">
-
-    <!-- Vishal Verma -->
-    <div class="tm-card reveal">
-      <div class="tm-photo">
-        <!-- Replace src with: images/vishal-verma.jpg -->
-        <div class="tm-placeholder">
-          <div class="initials">VV</div>
-          <div class="ph-note">vishal-verma.jpg</div>
-        </div>
-        <div class="tm-photo-overlay">
-          <p class="tm-photo-quote">"Travel and education together have the power to change lives."</p>
-        </div>
-      </div>
-      <div class="tm-body">
-        <h3>Vishal Verma</h3>
-        <span class="tm-role">Founder & Director</span>
-        <p>With 14+ years in the IT industry across 16 countries, Vishal founded Frontiers driven by a passion for travel and education. He holds a B.E. in Electronics & Telecom from Pune University and an MBA (Finance) from Symbiosis Institute, Pune.</p>
-        <p style="margin-top:0.7rem">He serves as Honorary Director of Global Events for the World Scholar's Cup, a role that reflects Frontiers' exceptional contribution to this global academic programme.</p>
-        <div class="tm-tags">
-          <span class="tm-tag">Founder</span>
-          <span class="tm-tag">WSC Global Events</span>
-        </div>
+  <!-- ══ VISHAL VERMA — FOUNDER (full-width featured) ══ -->
+  <div class="founder-card reveal">
+    <div class="founder-photo">
+      <!-- To add photo: replace the div below with:
+           <img src="assets/images/vishal-verma.jpg" alt="Vishal Verma"> -->
+      <div class="founder-placeholder">
+        <div class="fi">VV</div>
+        <div class="fn">vishal-verma.jpg</div>
       </div>
     </div>
-
-    <!-- Dipankar Arora -->
-    <div class="tm-card reveal" style="transition-delay:0.07s">
-      <div class="tm-photo">
-        <!-- Replace src with: images/dipankar-arora.jpg -->
-        <div class="tm-placeholder">
-          <div class="initials">DA</div>
-          <div class="ph-note">dipankar-arora.jpg</div>
-        </div>
-        <div class="tm-photo-overlay">
-          <p class="tm-photo-quote">"Every programme we run is a chance to change a child's trajectory."</p>
-        </div>
-      </div>
-      <div class="tm-body">
-        <h3>Dipankar Arora</h3>
-        <span class="tm-role">Head of Operations</span>
-        <p>Dipankar handles operations on a pan-India basis and helps organise global events. He brings over 20 years of corporate experience, including a distinguished tenure with the Tata Group.</p>
-        <div class="tm-tags">
-          <span class="tm-tag">Operations</span>
-          <span class="tm-tag">Pan-India</span>
-          <span class="tm-tag">Tata Group Alumni</span>
-        </div>
+    <div class="founder-info">
+      <div class="role-tag">Founder &amp; Director</div>
+      <h2>Vishal Verma</h2>
+      <p>With 14+ years in the IT industry across 16 countries, Vishal founded Frontiers driven by a passion for travel and education. He holds a B.E. in Electronics &amp; Telecom from Pune University and an MBA (Finance) from Symbiosis Institute, Pune.</p>
+      <p>He serves as Honorary Director of Global Events for the World Scholar's Cup, a role that reflects Frontiers' exceptional contribution to this global academic programme.</p>
+      <div class="founder-tags">
+        <span>Founder</span>
+        <span>WSC Global Events Director</span>
+        <span>16 Countries Experience</span>
       </div>
     </div>
-
-    <!-- Vikram Arora -->
-    <div class="tm-card reveal" style="transition-delay:0.14s">
-      <div class="tm-photo">
-        <!-- Replace src with: images/vikram-arora.jpg -->
-        <div class="tm-placeholder">
-          <div class="initials">VA</div>
-          <div class="ph-note">vikram-arora.jpg</div>
-        </div>
-        <div class="tm-photo-overlay">
-          <p class="tm-photo-quote">"A calm mind is the foundation of any great achievement."</p>
-        </div>
-      </div>
-      <div class="tm-body">
-        <h3>Vikram Arora</h3>
-        <span class="tm-role">Vice President, Administration</span>
-        <p>Vikram oversees administration and brings 10 years of IT industry experience. He holds a B.E. in Mechanical Engineering from Govt. College of Engineering, Pune.</p>
-        <p style="margin-top:0.7rem">A dedicated meditation practitioner for 23+ years, he writes on Stress Management, Positive Thinking, and Emotional Intelligence.</p>
-        <div class="tm-tags">
-          <span class="tm-tag">Administration</span>
-          <span class="tm-tag">IT Industry</span>
-          <span class="tm-tag">Wellness Author</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dexter Noakes -->
-    <div class="tm-card reveal" style="transition-delay:0.07s">
-      <div class="tm-photo">
-        <!-- Replace src with: images/dexter-noakes.jpg -->
-        <div class="tm-placeholder">
-          <div class="initials">DN</div>
-          <div class="ph-note">dexter-noakes.jpg</div>
-        </div>
-        <div class="tm-photo-overlay">
-          <p class="tm-photo-quote">"South India is full of students ready to take on the world."</p>
-        </div>
-      </div>
-      <div class="tm-body">
-        <h3>Dexter Noakes</h3>
-        <span class="tm-role">General Manager, South India</span>
-        <p>A commerce graduate from Bangalore University, Dexter brings over 25 years of experience in the travel industry. Based in South India, he leads regional operations and maintains relationships with over a hundred top schools across the region.</p>
-        <div class="tm-tags">
-          <span class="tm-tag">South India</span>
-          <span class="tm-tag">Travel Industry</span>
-          <span class="tm-tag">25+ Years Exp.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Harit Yadav -->
-    <div class="tm-card reveal" style="transition-delay:0.14s">
-      <div class="tm-photo">
-        <!-- Replace src with: images/harit-yadav.jpg -->
-        <div class="tm-placeholder">
-          <div class="initials">HY</div>
-          <div class="ph-note">harit-yadav.jpg</div>
-        </div>
-        <div class="tm-photo-overlay">
-          <p class="tm-photo-quote">"The numbers tell the story of every student we've reached."</p>
-        </div>
-      </div>
-      <div class="tm-body">
-        <h3>Harit Yadav</h3>
-        <span class="tm-role">Accounts & Administration Manager</span>
-        <p>Harit manages the accounts and administration functions at Frontiers, ensuring every programme runs smoothly behind the scenes. He holds a degree in commerce.</p>
-        <div class="tm-tags">
-          <span class="tm-tag">Finance</span>
-          <span class="tm-tag">Administration</span>
-          <span class="tm-tag">Commerce Graduate</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Edwin Joseph -->
-    <div class="tm-card reveal" style="transition-delay:0.21s">
-      <div class="tm-photo">
-        <!-- Replace src with: images/edwin-joseph.jpg -->
-        <div class="tm-placeholder">
-          <div class="initials">EJ</div>
-          <div class="ph-note">edwin-joseph.jpg</div>
-        </div>
-        <div class="tm-photo-overlay">
-          <p class="tm-photo-quote">"Every school we reach is another generation we can inspire."</p>
-        </div>
-      </div>
-      <div class="tm-body">
-        <h3>Edwin Joseph</h3>
-        <span class="tm-role">Outreach Manager</span>
-        <p>Edwin is responsible for outreach and school partnerships across India. He holds a degree in International Relations and Political Science from Ashoka University, bringing a global perspective to everything he does.</p>
-        <div class="tm-tags">
-          <span class="tm-tag">Outreach</span>
-          <span class="tm-tag">Ashoka University</span>
-          <span class="tm-tag">IR & Politics</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Ipshita Bagchi -->
-    <div class="tm-card reveal" style="transition-delay:0.07s">
-      <div class="tm-photo">
-        <!-- Replace src with: images/ipshita-bagchi.jpg -->
-        <div class="tm-placeholder">
-          <div class="initials">IB</div>
-          <div class="ph-note">ipshita-bagchi.jpg</div>
-        </div>
-        <div class="tm-photo-overlay">
-          <p class="tm-photo-quote">"Understanding what motivates young people is everything."</p>
-        </div>
-      </div>
-      <div class="tm-body">
-        <h3>Ipshita Bagchi</h3>
-        <span class="tm-role">Outreach Coordinator</span>
-        <p>Ipshita coordinates outreach activities and brings a unique understanding of student motivation and behaviour. She holds a Master's degree in Corporate and Behavioural Psychology from O.P. Jindal University.</p>
-        <div class="tm-tags">
-          <span class="tm-tag">Outreach</span>
-          <span class="tm-tag">O.P. Jindal</span>
-          <span class="tm-tag">Behavioural Psychology</span>
-        </div>
-      </div>
-    </div>
-
   </div>
+
+  <!-- ══ ROW 1: Dipankar | Vikram ══ -->
+  <div class="team-row reveal">
+
+    <!-- Col 1: Dipankar photo -->
+    <div class="tr-photo">
+      <!-- <img src="assets/images/dipankar-arora.jpg" alt="Dipankar Arora"> -->
+      <div class="tr-placeholder">
+        <div class="ti">DA</div>
+        <div class="tn">dipankar-arora.jpg</div>
+      </div>
+    </div>
+
+    <!-- Col 2: Dipankar text -->
+    <div class="tr-text">
+      <h3>Dipankar Arora</h3>
+      <span class="tr-role">Head of Operations</span>
+      <p>Dipankar handles operations on a pan-India basis and helps organise global events. He brings over 20 years of corporate experience, including a distinguished tenure with the Tata Group.</p>
+      <div class="tr-tags">
+        <span>Operations</span>
+        <span>Pan-India</span>
+        <span>Tata Group Alumni</span>
+      </div>
+    </div>
+
+    <!-- Col 3: Vikram photo -->
+    <div class="tr-photo">
+      <!-- <img src="assets/images/vikram-arora.jpg" alt="Vikram Arora"> -->
+      <div class="tr-placeholder">
+        <div class="ti">VA</div>
+        <div class="tn">vikram-arora.jpg</div>
+      </div>
+    </div>
+
+    <!-- Col 4: Vikram text -->
+    <div class="tr-text">
+      <h3>Vikram Arora</h3>
+      <span class="tr-role">Vice President, Administration</span>
+      <p>Vikram oversees administration and brings 10 years of IT industry experience. He holds a B.E. in Mechanical Engineering from Govt. College of Engineering, Pune. A 23-year meditation practitioner, he writes on Stress Management, Positive Thinking, and Emotional Intelligence.</p>
+      <div class="tr-tags">
+        <span>Administration</span>
+        <span>IT Industry</span>
+        <span>Wellness Author</span>
+      </div>
+    </div>
+
+  </div><!-- /row 1 -->
+
+  <!-- ══ ROW 2: Dexter | Harit ══ -->
+  <div class="team-row reveal" style="transition-delay:0.08s">
+
+    <!-- Col 1: Dexter photo -->
+    <div class="tr-photo">
+      <!-- <img src="assets/images/dexter-noakes.jpg" alt="Dexter Noakes"> -->
+      <div class="tr-placeholder">
+        <div class="ti">DN</div>
+        <div class="tn">dexter-noakes.jpg</div>
+      </div>
+    </div>
+
+    <!-- Col 2: Dexter text -->
+    <div class="tr-text">
+      <h3>Dexter Noakes</h3>
+      <span class="tr-role">General Manager, South India</span>
+      <p>A commerce graduate from Bangalore University, Dexter brings over 25 years of experience in the travel industry. Based in South India, he leads regional operations and maintains relationships with over a hundred top schools across the region.</p>
+      <div class="tr-tags">
+        <span>South India</span>
+        <span>Travel Industry</span>
+        <span>25+ Years Exp.</span>
+      </div>
+    </div>
+
+    <!-- Col 3: Harit photo -->
+    <div class="tr-photo">
+      <!-- <img src="assets/images/harit-yadav.jpg" alt="Harit Yadav"> -->
+      <div class="tr-placeholder">
+        <div class="ti">HY</div>
+        <div class="tn">harit-yadav.jpg</div>
+      </div>
+    </div>
+
+    <!-- Col 4: Harit text -->
+    <div class="tr-text">
+      <h3>Harit Yadav</h3>
+      <span class="tr-role">Accounts &amp; Administration Manager</span>
+      <p>Harit manages the accounts and administration functions at Frontiers, ensuring every programme runs smoothly behind the scenes. He holds a degree in commerce.</p>
+      <div class="tr-tags">
+        <span>Finance</span>
+        <span>Administration</span>
+        <span>Commerce Graduate</span>
+      </div>
+    </div>
+
+  </div><!-- /row 2 -->
+
+  <!-- ══ ROW 3: Edwin | Ipshita ══ -->
+  <div class="team-row reveal" style="transition-delay:0.16s">
+
+    <!-- Col 1: Edwin photo -->
+    <div class="tr-photo">
+      <!-- <img src="assets/images/edwin-joseph.jpg" alt="Edwin Joseph"> -->
+      <div class="tr-placeholder">
+        <div class="ti">EJ</div>
+        <div class="tn">edwin-joseph.jpg</div>
+      </div>
+    </div>
+
+    <!-- Col 2: Edwin text -->
+    <div class="tr-text">
+      <h3>Edwin Joseph</h3>
+      <span class="tr-role">Outreach Manager</span>
+      <p>Edwin is responsible for outreach and school partnerships across India. He holds a degree in International Relations and Political Science from Ashoka University, bringing a global perspective to everything he does.</p>
+      <div class="tr-tags">
+        <span>Outreach</span>
+        <span>Ashoka University</span>
+        <span>IR &amp; Politics</span>
+      </div>
+    </div>
+
+    <!-- Col 3: Ipshita photo -->
+    <div class="tr-photo">
+      <!-- <img src="assets/images/ipshita-bagchi.jpg" alt="Ipshita Bagchi"> -->
+      <div class="tr-placeholder">
+        <div class="ti">IB</div>
+        <div class="tn">ipshita-bagchi.jpg</div>
+      </div>
+    </div>
+
+    <!-- Col 4: Ipshita text -->
+    <div class="tr-text">
+      <h3>Ipshita Bagchi</h3>
+      <span class="tr-role">Outreach Coordinator</span>
+      <p>Ipshita coordinates outreach activities and brings a unique understanding of student motivation and behaviour. She holds a Master's degree in Corporate and Behavioural Psychology from O.P. Jindal University.</p>
+      <div class="tr-tags">
+        <span>Outreach</span>
+        <span>O.P. Jindal</span>
+        <span>Behavioural Psychology</span>
+      </div>
+    </div>
+
+  </div><!-- /row 3 -->
+
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══ JOIN THE TEAM / CTA ═══ -->
+<!-- JOIN THE TEAM CTA -->
 <section class="section section--dark" style="text-align:center">
   <div class="reveal">
     <div class="section-tag section-tag--light" style="justify-content:center">Work With Us</div>
@@ -351,7 +391,7 @@
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -372,8 +412,8 @@
       <ul>
         <li><a href="about.html">Our Story</a></li>
         <li><a href="team.html">Our Team</a></li>
-        <li><a href="about.html#values">Values</a></li>
         <li><a href="about.html#partners">Partners</a></li>
+        <li><a href="about.html#offices">Offices</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -387,12 +427,14 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2024 Frontiers Education. All rights reserved.</p>
-    <div class="social-links"><a href="https://www.instagram.com/wscind" target="_blank" rel="noopener" title="Instagram">ig</a></div>
+    <p>&copy; 2024 Frontiers Education. All rights reserved.</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/wscind" target="_blank" rel="noopener" title="Instagram">ig</a>
+    </div>
   </div>
 </footer>
 
-</div>
+</div><!-- /page-wrap -->
 <script src="assets/js/main.js"></script>
 </body>
 </html>
