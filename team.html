@@ -79,7 +79,9 @@
 .tr-photo {
   position: relative; overflow: hidden;
   background: linear-gradient(165deg, var(--navy) 0%, #1a3a6e 100%);
-  min-height: 240px;
+  aspect-ratio: 4 / 5;
+  height: auto;
+  min-height: unset;
 }
 .tr-photo img {
   width: 100%; height: 100%;
@@ -89,7 +91,8 @@
 .team-row:hover .tr-photo img { transform: scale(1.04); }
 
 .tr-placeholder {
-  width: 100%; height: 100%; min-height: 240px;
+  width: 100%; height: 100%;
+  min-height: unset;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 0.5rem;
 }
@@ -153,7 +156,7 @@
 }
 @media (max-width: 520px) {
   .team-row { grid-template-columns: 1fr; }
-  .tr-photo { min-height: 180px; border-left: none !important; }
+  .tr-photo { aspect-ratio: 4/5; min-height: unset; border-left: none !important; }
   .tr-placeholder { min-height: 180px; }
   .tr-text { border-left: none; border-top: 1px solid var(--border); }
   .founder-info { padding: 1.5rem; }
@@ -213,12 +216,7 @@
   <!-- ══ VISHAL VERMA — FOUNDER (full-width featured) ══ -->
   <div class="founder-card reveal">
     <div class="founder-photo">
-      <!-- To add photo: replace the div below with:
-           <img src="assets/images/vishal-verma.jpg" alt="Vishal Verma"> -->
-      <div class="founder-placeholder">
-        <div class="fi">VV</div>
-        <div class="fn">vishal-verma.jpg</div>
-      </div>
+      <img src="assets/images/vishal-verma.jpg" alt="Vishal Verma" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
     </div>
     <div class="founder-info">
       <div class="role-tag">Founder &amp; Director</div>
@@ -238,32 +236,27 @@
 
     <!-- Col 1: Dipankar photo -->
     <div class="tr-photo">
-      <!-- <img src="assets/images/dipankar-arora.jpg" alt="Dipankar Arora"> -->
-      <div class="tr-placeholder">
-        <div class="ti">DA</div>
-        <div class="tn">dipankar-arora.jpg</div>
-      </div>
+      <img src="assets/images/dipankar-arora.jpg" alt="Dipankar Arora" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
     </div>
 
     <!-- Col 2: Dipankar text -->
     <div class="tr-text">
       <h3>Dipankar Arora</h3>
-      <span class="tr-role">Head of Operations</span>
-      <p>Dipankar handles operations on a pan-India basis and helps organise global events. He brings over 20 years of corporate experience, including a distinguished tenure with the Tata Group.</p>
+      <span class="tr-role">Vice President, Head of Operations</span>
+      <p>Dipankar oversees Pan-India operations for the World Scholar's Cup and plays a pivotal role in the planning and execution of global events for Indian school delegations.</p>
+      <p>He holds a Bachelor of Engineering degree in Electrical and Electronics from Gulbarga University.</p>
+      <p>With over 30 years of experience spanning both Government and Corporate sectors, he brings extensive operational expertise and strategic leadership to the organisation. His distinguished professional journey includes a significant tenure with the Tata Group of Companies.</p>
       <div class="tr-tags">
         <span>Operations</span>
         <span>Pan-India</span>
+        <span>30+ Years Exp.</span>
         <span>Tata Group Alumni</span>
       </div>
     </div>
 
     <!-- Col 3: Vikram photo -->
     <div class="tr-photo">
-      <!-- <img src="assets/images/vikram-arora.jpg" alt="Vikram Arora"> -->
-      <div class="tr-placeholder">
-        <div class="ti">VA</div>
-        <div class="tn">vikram-arora.jpg</div>
-      </div>
+      <img src="assets/images/vikram-arora.jpg" alt="Vikram Arora" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
     </div>
 
     <!-- Col 4: Vikram text -->
@@ -285,11 +278,7 @@
 
     <!-- Col 1: Dexter photo -->
     <div class="tr-photo">
-      <!-- <img src="assets/images/dexter-noakes.jpg" alt="Dexter Noakes"> -->
-      <div class="tr-placeholder">
-        <div class="ti">DN</div>
-        <div class="tn">dexter-noakes.jpg</div>
-      </div>
+      <img src="assets/images/dexter-noakes.jpg" alt="Dexter Noakes" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
     </div>
 
     <!-- Col 2: Dexter text -->
@@ -306,11 +295,7 @@
 
     <!-- Col 3: Harit photo -->
     <div class="tr-photo">
-      <!-- <img src="assets/images/harit-yadav.jpg" alt="Harit Yadav"> -->
-      <div class="tr-placeholder">
-        <div class="ti">HY</div>
-        <div class="tn">harit-yadav.jpg</div>
-      </div>
+      <img src="assets/images/harit-yadav.jpg" alt="Harit Yadav" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
     </div>
 
     <!-- Col 4: Harit text -->
@@ -332,11 +317,7 @@
 
     <!-- Col 1: Edwin photo -->
     <div class="tr-photo">
-      <!-- <img src="assets/images/edwin-joseph.jpg" alt="Edwin Joseph"> -->
-      <div class="tr-placeholder">
-        <div class="ti">EJ</div>
-        <div class="tn">edwin-joseph.jpg</div>
-      </div>
+      <img src="assets/images/edwin-joseph.jpg" alt="Edwin Joseph" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
     </div>
 
     <!-- Col 2: Edwin text -->
@@ -353,11 +334,7 @@
 
     <!-- Col 3: Ipshita photo -->
     <div class="tr-photo">
-      <!-- <img src="assets/images/ipshita-bagchi.jpg" alt="Ipshita Bagchi"> -->
-      <div class="tr-placeholder">
-        <div class="ti">IB</div>
-        <div class="tn">ipshita-bagchi.jpg</div>
-      </div>
+      <img src="assets/images/ipshita-bagchi.jpg" alt="Ipshita Bagchi" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
     </div>
 
     <!-- Col 4: Ipshita text -->
