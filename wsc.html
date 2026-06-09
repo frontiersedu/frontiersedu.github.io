@@ -40,37 +40,34 @@
   transition: all 0.3s;
 }
 .subject-card:hover { background: rgba(255,255,255,0.11); border-color: rgba(232,160,32,0.3); transform: translateY(-3px); }
-.subject-emoji { font-size: 2.2rem; margin-bottom: 0.7rem; }
-.subject-card h4 {
-  font-family: 'Playfair Display', serif;
-  color: var(--white); font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;
-}
-.subject-card p { font-size: 0.83rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.subject-emoji { font-size: 2rem; margin-bottom: 0.6rem; }
+.subject-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--white); margin-bottom: 0.4rem; }
+.subject-card p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
 
-/* Journey steps */
-.journey { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+/* Journey */
+.journey {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  position: relative;
+}
 .journey::before {
-  content: ''; position: absolute; top: 36px; left: 16.7%; right: 16.7%; height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--gold));
-  z-index: 0;
+  content: '';
+  position: absolute; top: 28px; left: 5%; right: 5%;
+  height: 2px; background: var(--border); z-index: 0;
 }
-.journey-step { text-align: center; padding: 0 1.5rem; position: relative; z-index: 1; }
+.journey-step { text-align: center; position: relative; z-index: 1; }
 .step-num {
-  width: 72px; height: 72px; border-radius: 50%;
-  background: var(--navy); border: 3px solid var(--gold);
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--navy); color: var(--gold);
+  font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900;
-  color: var(--gold); margin: 0 auto 1.2rem;
+  margin: 0 auto 1.2rem; border: 3px solid var(--gold);
 }
-.journey-step h4 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.05rem; color: var(--navy); margin-bottom: 0.5rem;
-}
-.journey-step p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+.journey-step h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.5rem; }
+.journey-step p { font-size: 0.86rem; color: var(--muted); line-height: 1.7; }
 
-/* TOC highlight */
-.toc-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: center; }
-.toc-photo-stack { position: relative; }
+/* TOC */
+.toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.toc-photo-wrap { position: relative; }
 .toc-photo-main { border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; }
 .toc-photo-main img { width: 100%; height: 100%; object-fit: cover; }
 .toc-badge {
@@ -91,14 +88,130 @@
 .toc-detail-text h5 { font-size: 0.82rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
 .toc-detail-text p { font-size: 0.84rem; color: rgba(255,255,255,0.55); }
 
-/* Testimonial */
-.testimonial {
-  background: var(--light); border-left: 4px solid var(--gold);
-  border-radius: 0 6px 6px 0; padding: 1.8rem 2rem;
+/* ═══ TESTIMONIAL CAROUSEL ═══ */
+.testimonial-carousel-section {
+  background: var(--light);
+  padding: 4rem 0 3rem;
+  margin-top: 4rem;
+  border-top: 1px solid var(--border);
+}
+.testimonial-carousel-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.testimonial-carousel-header .section-tag {
+  justify-content: center;
+}
+.tcarousel-track-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.tcarousel-track {
+  display: flex;
+  gap: 1.5rem;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* ── FIX 1: card width + text overflow ── */
+.tcarousel-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 2rem 2rem 1.6rem;
+  min-width: calc(33.333% - 1rem);
+  max-width: calc(33.333% - 1rem);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  box-shadow: 0 4px 18px rgba(10,22,40,0.06);
+  transition: box-shadow 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  word-break: break-word;
+}
+.tcarousel-card:hover {
+  box-shadow: 0 10px 36px rgba(10,22,40,0.13);
+  transform: translateY(-4px);
+}
+.tcarousel-quote {
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--gold);
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 0.6rem;
+}
+.tcarousel-card blockquote {
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.78;
+  margin-bottom: 1.2rem;
+  flex-grow: 1;
+}
+.tcarousel-cite {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: normal;
+  font-weight: 600;
+  border-top: 1px solid var(--border);
+  padding-top: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tcarousel-cite::before {
+  content: '—';
+  color: var(--gold);
+}
+/* Nav controls */
+.tcarousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   margin-top: 2rem;
 }
-.testimonial blockquote { font-style: italic; font-size: 0.95rem; color: var(--text); line-height: 1.75; margin-bottom: 0.8rem; }
-.testimonial cite { font-size: 0.8rem; color: var(--muted); font-style: normal; font-weight: 600; }
+.tcarousel-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: transparent;
+  color: var(--navy);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s;
+}
+.tcarousel-btn:hover {
+  background: var(--gold);
+  color: var(--white);
+}
+.tcarousel-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.tcarousel-dots {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.tcarousel-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s;
+  padding: 0;
+}
+.tcarousel-dot.active {
+  background: var(--gold);
+  width: 22px;
+  border-radius: 4px;
+}
 
 /* Values list */
 .values-list { display: flex; flex-wrap: wrap; gap: 0.7rem; }
@@ -110,15 +223,52 @@
 }
 .value-pill::before { content: '✦'; font-size: 0.6rem; }
 
+/* ═══ GALLERY PLACEHOLDER ═══ */
+.photo-placeholder {
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #e8edf5 0%, #d0d8e8 100%);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border: 2px dashed rgba(10,22,40,0.15);
+  cursor: pointer;
+  transition: all 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+.photo-placeholder:hover {
+  background: linear-gradient(135deg, #dde4f0 0%, #c4cfe3 100%);
+  border-color: var(--gold);
+}
+.photo-placeholder-icon { font-size: 2.2rem; opacity: 0.45; }
+.photo-placeholder-label {
+  font-size: 0.78rem; font-weight: 600; color: var(--navy);
+  opacity: 0.5; font-family: 'DM Sans', sans-serif;
+  text-align: center; padding: 0 1rem;
+}
+.photo-placeholder-badge {
+  position: absolute; top: 10px; left: 10px;
+  background: var(--gold); color: var(--white);
+  font-size: 0.65rem; font-weight: 700;
+  padding: 3px 9px; border-radius: 20px;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.4px; text-transform: uppercase;
+}
+
 @media (max-width: 900px) {
   .event-grid { grid-template-columns: 1fr; }
   .subjects-grid { grid-template-columns: repeat(2, 1fr); }
   .journey { grid-template-columns: 1fr; gap: 2rem; }
   .journey::before { display: none; }
   .toc-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .tcarousel-card { min-width: calc(50% - 0.75rem); max-width: calc(50% - 0.75rem); }
 }
 @media (max-width: 640px) {
   .subjects-grid { grid-template-columns: 1fr 1fr; }
+  .tcarousel-card { min-width: 100%; max-width: 100%; }
 }
 </style>
 </head>
@@ -128,13 +278,14 @@
   <a href="index.html" class="nav-logo">
     <img src="assets/images/frontier-logo.png" alt="Frontiers Education">
   </a>
-    <ul class="nav-links">
+  <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="wsc.html" class="active">World Scholar's Cup</a></li>
     <li><a href="about.html">Our Story</a></li>
     <li><a href="team.html">Our Team</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
+  <a href="contact.html" class="nav-cta">Enquire Now</a>
   <div class="nav-hamburger"><span></span><span></span><span></span></div>
 </nav>
 <nav class="mobile-nav">
@@ -151,6 +302,7 @@
 <!-- ═══ PAGE HERO ═══ -->
 <div class="page-hero" style="padding-bottom:0">
   <div class="page-hero-inner">
+    <div class="section-tag">Exclusive partners in India</div>
     <h1>The World<br>Scholar's <em>Cup</em></h1>
     <p>A global celebration of learning, creativity, and friendship where students compete, collaborate, and discover new strengths.</p>
     <div class="btn-row">
@@ -202,10 +354,70 @@
     </div>
   </div>
 
-  <div class="testimonial reveal" style="margin-top:4rem">
-    <blockquote>"I'm ever so glad to have attended the global WSC in 2021. It was the fulcrum which changed both my university and academic aspirations. Before leading my team I was a prospective engineer destined for only Indian higher education. Today I find myself admitted to premier institutions of liberal arts studies, aspiring to law and political science. Such has been my tryst with Scholars Cup. It has become so much more than just a topic on which to write a passionate college essay."</blockquote>
-    <cite>Devika Sivaram, Dubai Modern High School, Yale University '2025</cite>
-  </div>
+  <!-- ═══ TESTIMONIAL CAROUSEL ═══ -->
+  <div class="testimonial-carousel-section reveal">
+    <div class="testimonial-carousel-header">
+      <div class="section-tag" style="justify-content:center">Student Voices</div>
+      <h3 style="font-family:'Playfair Display',serif; color:var(--navy); font-size:1.5rem; margin-top:0.4rem">What Our Scholars Say</h3>
+    </div>
+
+    <div class="tcarousel-track-wrap" id="tcarouselWrap">
+      <div class="tcarousel-track" id="tcarouselTrack">
+
+        <!-- Card 1 -->
+        <div class="tcarousel-card">
+          <div class="tcarousel-quote">"</div>
+          <blockquote>I'm ever so glad to have attended the global WSC in 2021. It was the fulcrum which changed both my university and academic aspirations. Before leading my team I was a prospective engineer destined for only Indian higher education. Today I find myself admitted to premier institutions of liberal arts studies, aspiring to law and political science. Such has been my tryst with Scholars Cup.</blockquote>
+          <cite class="tcarousel-cite">Devika Sivaram, Dubai Modern High School &mdash; Yale University '2025</cite>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="tcarousel-card">
+          <div class="tcarousel-quote">"</div>
+          <blockquote>WSC taught me that learning doesn't have to be confined to a classroom. Debating with students from 70 countries, exploring ideas across history, science, and art — it opened my mind in ways I never expected. I came back a completely different student.</blockquote>
+          <cite class="tcarousel-cite">Arjun Mehta, The Shri Ram School, Delhi &mdash; Global Round, Bangkok 2023</cite>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="tcarousel-card">
+          <div class="tcarousel-quote">"</div>
+          <blockquote>The Scholar's Cup gave me friendships that span continents. Our team won gold at the regional round, but the real prize was the confidence I found on stage — debating, performing, competing. Frontiers made every step of it possible for us.</blockquote>
+          <cite class="tcarousel-cite">Priya Nair, Greenwood High, Bengaluru &mdash; Regional Champion 2024</cite>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="tcarousel-card">
+          <div class="tcarousel-quote">"</div>
+          <blockquote>Walking into Yale for the Tournament of Champions was surreal. I had never imagined standing in one of the world's greatest universities, competing with the best young minds on the planet. WSC didn't just prepare me academically — it showed me what I'm truly capable of.</blockquote>
+          <cite class="tcarousel-cite">Rahul Krishnamurthy, DPS International &mdash; Tournament of Champions, Yale 2023</cite>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="tcarousel-card">
+          <div class="tcarousel-quote">"</div>
+          <blockquote>I had never debated before WSC. Now I can argue both sides of almost any topic with confidence. The programme pushed me out of my comfort zone in the best way. If you're on the fence — just do it. You will not regret it.</blockquote>
+          <cite class="tcarousel-cite">Aanya Sharma, Step By Step School, Noida &mdash; Global Round, Kuala Lumpur 2024</cite>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="tcarousel-card">
+          <div class="tcarousel-quote">"</div>
+          <blockquote>WSC connected me with students who think differently, challenge ideas, and genuinely love learning. Those friendships are my most treasured takeaway. I travelled to three countries, earned medals in four subjects, and grew more than I thought possible in a single year.</blockquote>
+          <cite class="tcarousel-cite">Ishaan Verma, Pathways World School, Gurgaon &mdash; Global Round 2022 &amp; 2023</cite>
+        </div>
+
+      </div><!-- /.tcarousel-track -->
+    </div><!-- /.tcarousel-track-wrap -->
+
+    <!-- Controls -->
+    <div class="tcarousel-controls">
+      <button class="tcarousel-btn" id="tcarouselPrev" aria-label="Previous testimonial">&#8592;</button>
+      <div class="tcarousel-dots" id="tcarouselDots"></div>
+      <button class="tcarousel-btn" id="tcarouselNext" aria-label="Next testimonial">&#8594;</button>
+    </div>
+
+  </div><!-- /.testimonial-carousel-section -->
+
 </section>
 
 <div class="divider"></div>
@@ -213,10 +425,10 @@
 <!-- ═══ STATS ═══ -->
 <section class="section section--dark" style="padding-top:0; padding-bottom:0">
   <div class="stats-row">
-    <div class="stat-item reveal"><div class="stat-num">70+</div><div class="stat-label">Countries & Regions</div></div>
+    <div class="stat-item reveal"><div class="stat-num">70+</div><div class="stat-label">Countries &amp; Regions</div></div>
     <div class="stat-item reveal" style="transition-delay:0.08s"><div class="stat-num">100+</div><div class="stat-label">Regional Rounds Each Year</div></div>
     <div class="stat-item reveal" style="transition-delay:0.16s"><div class="stat-num">3</div><div class="stat-label">Age Divisions for All Levels</div></div>
-    <div class="stat-item reveal" style="transition-delay:0.24s"><div class="stat-num">∞</div><div class="stat-label">Teams Per School Allowed</div></div>
+    <div class="stat-item reveal" style="transition-delay:0.24s"><div class="stat-num">&#8734;</div><div class="stat-label">Teams Per School Allowed</div></div>
   </div>
 </section>
 
@@ -232,17 +444,17 @@
     <div class="journey-step reveal">
       <div class="step-num">1</div>
       <h4>Regional Round</h4>
-      <p>Teams of three compete at one of 12 regional rounds held across India every year. Frontiers Education organizes regional rounds in multiple cities, making participation accessible to 200+ schools and 5,000+ students nationwide.</p>
+      <p>Teams of three compete at one of 12 regional rounds held across India every year. Frontiers Education organizes regional rounds in multiple cities, making participation accessible to 200+ schools and 5,000+ students.</p>
     </div>
     <div class="journey-step reveal" style="transition-delay:0.12s">
       <div class="step-num">2</div>
       <h4>Global Round</h4>
-      <p>Qualifying teams travel to an international Global Round to compete with their peers from over 60 countries. There are nine Global Rounds organized each year in various parts of the world.</p>
+      <p>Top teams advance to the Global Round — held in world-class destinations like Bangkok and Kuala Lumpur — where they compete alongside students from 70+ countries across six subject areas.</p>
     </div>
     <div class="journey-step reveal" style="transition-delay:0.24s">
       <div class="step-num">3</div>
       <h4>Tournament of Champions</h4>
-      <p>The top-qualifying teams advance to the Tournament of Champions at Yale University, the spectacular season finale hosted by the Yale International Relations Association.</p>
+      <p>The highest-scoring teams from Global Rounds earn the right to compete at the Tournament of Champions, held annually at Yale University in New Haven, Connecticut.</p>
     </div>
   </div>
 </section>
@@ -251,77 +463,47 @@
 
 <!-- ═══ THE FOUR EVENTS ═══ -->
 <section class="section section--white" id="events">
-  <div style="max-width:600px; margin-bottom:3.5rem" class="reveal">
-    <div class="section-tag">Competition Format</div>
-    <h2 class="section-title">The Four Team Events</h2>
-    <p class="section-sub">Every World Scholar's Cup features four exciting events that test different skills, from analytical thinking and creative writing to collaborative debate and rapid-fire knowledge.</p>
+  <div style="text-align:center; max-width:600px; margin:0 auto 3.5rem" class="reveal">
+    <div class="section-tag" style="justify-content:center">Competition Format</div>
+    <h2 class="section-title">The Four Events in the World Scholar's Cup</h2>
   </div>
-
   <div class="event-grid">
-
     <div class="event-card reveal">
       <div class="event-card-top">
         <h3>Scholar's Bowl</h3>
       </div>
-      <div class="event-photo" style="margin:1rem 1.6rem 0">
-        <img src="assets/images/wsc-scholars-bowl.jpg" alt="Scholar's Bowl" loading="lazy">
-      </div>
       <div class="event-card-body">
-        <p>Every team in the theater. Every team with a clicker. Every question harder than the one before. Your team works together to solve analytic questions and multimedia challenges, racing the clock while other teams do the same.</p>
-        <p><strong>It's loud, it's strategic,</strong> and it will surprise you. Don't be shocked if you're asked to connect a poem you studied to a clip from a popular TV series. Click before time runs out. Do not be deceived if you hear another team shout a wrong answer.</p>
+        <p>A fast-paced quiz that tests breadth of knowledge across all six subject areas. Teams of three work together to answer questions drawn from the season's curriculum — rewarding curiosity and collaborative thinking.</p>
       </div>
+      <div class="event-photo"><img src="assets/images/wsc-scholars-bowl.jpg" alt="Scholar's Bowl" loading="lazy"></div>
     </div>
-
     <div class="event-card reveal" style="transition-delay:0.1s">
       <div class="event-card-top">
         <h3>Collaborative Writing</h3>
       </div>
-      <div class="event-photo" style="margin:1rem 1.6rem 0">
-        <img src="assets/images/wsc-collaborative-writing.jpg" alt="Students engaged in Collaborative Writing" loading="lazy">
-      </div>
       <div class="event-card-body">
-        <p>Speak with the power of your pen. Given three to four prompts across the six subject areas, from creative scenarios to persuasive arguments, each teammate writes a different one. Two simple rules: as a team write three prompts total, and each person answers a different one.</p>
-        <p>You'll prepare with teammates first (no devices), then write individually, then review each other's work. Whether you craft a poem or a five-paragraph essay, make it exciting, because that means it will excite your reader too.</p>
+        <p>Students write individually across multiple essay genres, responding to prompts that blend creativity with critical thought. Writing is scored on argument, style, and engagement with the season's theme.</p>
       </div>
+      <div class="event-photo"><img src="assets/images/wsc-collaborative-writing.jpg" alt="Collaborative Writing" loading="lazy"></div>
     </div>
-
-    <div class="event-card reveal" style="transition-delay:0.05s">
+    <div class="event-card reveal" style="transition-delay:0.2s">
       <div class="event-card-top">
         <h3>Scholar's Challenge</h3>
       </div>
-      <div class="event-photo" style="margin:1rem 1.6rem 0">
-        <img src="assets/images/wsc-scholars-challenge.jpg" alt="Students at Scholar's Challenge" loading="lazy">
-      </div>
       <div class="event-card-body">
-        <p>It is multiple choice, so make multiple choices. The Challenge looks like any other test, but with an alpaca-powered twist: you can mark more than one answer per question. The fewer answers you mark, the more points you earn if you're right.</p>
-        <p>Apply your knowledge across six subjects and earn medals in one, two, or all of them. Every World Scholar discovers: even if you think you're a science expert, you might win a medal in the arts.</p>
+        <p>An individual multiple-choice exam across six subjects. The Scholar's Challenge rewards deep preparation and interdisciplinary thinking, covering everything from science and history to art and special areas.</p>
       </div>
+      <div class="event-photo"><img src="assets/images/wsc-scholars-challenge.jpg" alt="Scholar's Challenge" loading="lazy"></div>
     </div>
-
-    <div class="event-card reveal" style="transition-delay:0.15s">
+    <div class="event-card reveal" style="transition-delay:0.3s">
       <div class="event-card-top">
         <h3>Team Debate</h3>
       </div>
-      <div class="event-photo" style="margin:1rem 1.6rem 0">
-        <img src="assets/images/wsc-team-debate.jpg" alt="Team Debate at Yale" loading="lazy">
-      </div>
       <div class="event-card-body">
-        <p>Each team debates three times, on motions across all subjects, from policy to poetry. You might argue whether parents should access school surveillance cameras, or whether women make better superheroes. Use all you've learned to make the most persuasive case possible.</p>
-        <p>You'll have 15 minutes to plan, then each person speaks for up to 4 minutes. After each round, both teams give each other constructive feedback. Two-thirds of WSC students have never debated before. For everyone, it is transformative.</p>
+        <p>Teams of three debate motions connected to the season's theme. No prior experience required — WSC uses an accessible format designed to build confidence and communication skills in every student.</p>
       </div>
+      <div class="event-photo"><img src="assets/images/wsc-team-debate.jpg" alt="Team Debate" loading="lazy"></div>
     </div>
-
-  </div>
-
-  <!-- Sample motions -->
-  <div class="reveal" style="margin-top:3rem; background:var(--light); border-radius:8px; padding:2rem 2.5rem">
-    <h4 style="font-family:'Playfair Display',serif; color:var(--navy); margin-bottom:1.2rem; font-size:1.1rem">Sample Debate Motions from Past Seasons</h4>
-    <ul style="list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:0.7rem">
-      <li style="font-size:0.88rem; color:var(--muted); padding-left:1.2rem; position:relative"><span style="position:absolute;left:0;color:var(--accent)">›</span> Parents should have the right to implant GPS trackers in their children.</li>
-      <li style="font-size:0.88rem; color:var(--muted); padding-left:1.2rem; position:relative"><span style="position:absolute;left:0;color:var(--accent)">›</span> Social media has made it easier for people to recover from their mistakes.</li>
-      <li style="font-size:0.88rem; color:var(--muted); padding-left:1.2rem; position:relative"><span style="position:absolute;left:0;color:var(--accent)">›</span> If experienced alien leaders came to Earth to help run our countries, we should let them.</li>
-      <li style="font-size:0.88rem; color:var(--muted); padding-left:1.2rem; position:relative"><span style="position:absolute;left:0;color:var(--accent)">›</span> Laws should have expiration dates.</li>
-    </ul>
   </div>
 </section>
 
@@ -329,41 +511,41 @@
 
 <!-- ═══ SUBJECTS ═══ -->
 <section class="section section--dark" id="subjects">
-  <div style="text-align:center; max-width:600px; margin:0 auto 3.5rem" class="reveal">
-    <div class="section-tag section-tag--light" style="justify-content:center">Academic Content</div>
+  <div style="text-align:center; max-width:600px; margin:0 auto 3rem" class="reveal">
+    <div class="section-tag section-tag--light" style="justify-content:center">Curriculum</div>
     <h2 class="section-title section-title--light">Six Subject Areas</h2>
-    <p class="section-sub section-sub--light">Every year the WSC explores a unique annual theme through six interconnected subjects. Students discover connections between disciplines they'd never imagined before.</p>
+    <p class="section-sub section-sub--light">Each year, all four events draw from the same six interdisciplinary subjects — unified by a unique annual theme that changes every season.</p>
   </div>
   <div class="subjects-grid">
     <div class="subject-card reveal">
-      <div class="subject-emoji">🔬</div>
-      <h4>Science & Technology</h4>
-      <p>From biology to physics, technology to medicine, exploring the frontiers of human knowledge and discovery.</p>
-    </div>
-    <div class="subject-card reveal" style="transition-delay:0.07s">
-      <div class="subject-emoji">🌍</div>
-      <h4>Social Studies</h4>
-      <p>Economics, politics, geography, and society: understanding how the world is organised and how people live together.</p>
-    </div>
-    <div class="subject-card reveal" style="transition-delay:0.14s">
       <div class="subject-emoji">📜</div>
-      <h4>History</h4>
-      <p>The events, people, and ideas that shaped civilisation, and how understanding the past illuminates the present.</p>
+      <h4>History &amp; Current Events</h4>
+      <p>From ancient civilisations to today's headlines — explored through the lens of the season's theme.</p>
     </div>
-    <div class="subject-card reveal" style="transition-delay:0.21s">
+    <div class="subject-card reveal" style="transition-delay:0.08s">
+      <div class="subject-emoji">🔬</div>
+      <h4>Science &amp; Technology</h4>
+      <p>The wonders of the natural world, emerging technologies, and the ethical questions they raise.</p>
+    </div>
+    <div class="subject-card reveal" style="transition-delay:0.16s">
+      <div class="subject-emoji">📖</div>
+      <h4>Literature &amp; Media</h4>
+      <p>Novels, poetry, film, and journalism — analysed for meaning, craft, and cultural context.</p>
+    </div>
+    <div class="subject-card reveal" style="transition-delay:0.24s">
       <div class="subject-emoji">🎨</div>
-      <h4>Arts & Music</h4>
-      <p>Visual art, music, film, architecture, and design: the many ways humanity expresses itself creatively.</p>
+      <h4>Art &amp; Music</h4>
+      <p>Visual art, architecture, and music across cultures and eras, connecting beauty to the broader theme.</p>
     </div>
-    <div class="subject-card reveal" style="transition-delay:0.28s">
-      <div class="subject-emoji">📚</div>
-      <h4>Literature & Media</h4>
-      <p>Fiction, poetry, journalism, and digital media: how stories and language shape our understanding of the world.</p>
+    <div class="subject-card reveal" style="transition-delay:0.32s">
+      <div class="subject-emoji">⚖️</div>
+      <h4>Social Studies</h4>
+      <p>Economics, geography, civics, and ethics — understanding how societies are organised and why it matters.</p>
     </div>
-    <div class="subject-card reveal" style="transition-delay:0.35s">
+    <div class="subject-card reveal" style="transition-delay:0.40s">
       <div class="subject-emoji">✨</div>
       <h4>Special Area</h4>
-      <p>Each year a unique special area is introduced, offering a deep dive into an unexpected topic that ties the theme together.</p>
+      <p>A wildcard subject unique to each season — from food science to philosophy to the history of games.</p>
     </div>
   </div>
 </section>
@@ -371,51 +553,49 @@
 <div class="divider"></div>
 
 <!-- ═══ TOURNAMENT OF CHAMPIONS ═══ -->
-<section class="section section--white" id="toc">
+<section class="section section--dark" id="toc">
   <div class="toc-grid">
     <div class="reveal">
-      <div class="toc-photo-stack">
+      <div class="toc-photo-wrap">
         <div class="toc-photo-main">
-          <img src="assets/images/wsc-yale-ball.jpg" alt="Yale Ball — Tournament of Champions" loading="lazy">
+          <img src="assets/images/wsc-yale-ball.jpg" alt="Yale University campus" loading="lazy">
         </div>
         <div class="toc-badge">
-          <span>Season Finale</span>
-          Tournament of Champions<br>Yale University
+          <span>Held annually at</span>
+          Yale University
         </div>
       </div>
     </div>
     <div class="reveal" style="transition-delay:0.18s">
-      <div class="section-tag">The Grand Finale</div>
-      <h2 class="section-title">Tournament of Champions<br><em style="font-size:0.85em">at Yale University</em></h2>
-      <p class="section-sub">Bring together the best of the World Scholar's Cup with one of the world's leading universities, and you get our annual Tournament of Champions, hosted by the Yale International Relations Association at Yale University, New Haven.</p>
-      <div style="margin-top:2rem">
-        <div class="toc-detail reveal" style="transition-delay:0.22s">
-          <div class="toc-detail-icon">📅</div>
-          <div class="section-sub">
-            <h5>When</h5>
-            <p>Tournament of Champions 2026: Mid November, 2026 at Yale University, New Haven, CT</p>
-          </div>
+      <div class="section-tag section-tag--light">The pinnacle</div>
+      <h2 class="section-title section-title--light">Tournament of Champions</h2>
+      <p class="section-sub section-sub--light" style="margin-bottom:2rem">The Tournament of Champions at Yale University is the final stage of the WSC season. Only teams who qualify through their Global Round scores earn the right to compete — making it the world's most prestigious student academic tournament.</p>
+      <div class="toc-detail reveal" style="transition-delay:0.22s">
+        <div class="toc-detail-icon">🏆</div>
+        <div class="section-sub">
+          <h5>Elite Competition</h5>
+          <p>Compete against the highest-scoring teams from 70+ countries in Scholar's Bowl, Debate, Writing, and Scholar's Challenge.</p>
         </div>
-        <div class="toc-detail reveal" style="transition-delay:0.28s">
-          <div class="toc-detail-icon">👥</div>
-          <div class="section-sub">
-            <h5>Who Can Attend</h5>
-            <p>All three scholars must have qualified at a 2026 Global Round. All students must be age 11 or older.</p>
-          </div>
+      </div>
+      <div class="toc-detail reveal" style="transition-delay:0.28s">
+        <div class="toc-detail-icon">🌍</div>
+        <div class="section-sub">
+          <h5>Global Community</h5>
+          <p>Form friendships with brilliant young minds from every continent, united by a love of learning and a spirit of friendly competition.</p>
         </div>
-        <div class="toc-detail reveal" style="transition-delay:0.34s">
-          <div class="toc-detail-icon">🎓</div>
-          <div class="section-sub">
-            <h5>Yale Experience</h5>
-            <p>Meet Yale faculty & students, attend a college admissions panel, debate in Yale Classrooms, and explore one of the world's most beautiful university campuses.</p>
-          </div>
+      </div>
+      <div class="toc-detail reveal" style="transition-delay:0.34s">
+        <div class="toc-detail-icon">🎓</div>
+        <div class="section-sub">
+          <h5>Yale Experience</h5>
+          <p>Meet Yale faculty &amp; students, attend a college admissions panel, debate in Yale Classrooms, and explore one of the world's most beautiful university campuses.</p>
         </div>
-        <div class="toc-detail reveal" style="transition-delay:0.40s">
-          <div class="toc-detail-icon">🦙</div>
-          <div class="section-sub">
-            <h5>Iconic Highlights</h5>
-            <p>The Yale Ball, Woolsey Hall, the Shubert Theatre, a campus-wide scavenger hunt and real alpacas, including Painted Warrior, the official alpaca of the Tournament of Champions.</p>
-          </div>
+      </div>
+      <div class="toc-detail reveal" style="transition-delay:0.40s">
+        <div class="toc-detail-icon">🦙</div>
+        <div class="section-sub">
+          <h5>Iconic Highlights</h5>
+          <p>The Yale Ball, Woolsey Hall, the Shubert Theatre, a campus-wide scavenger hunt and real alpacas, including Painted Warrior, the official alpaca of the Tournament of Champions.</p>
         </div>
       </div>
     </div>
@@ -424,24 +604,39 @@
 
 <div class="divider"></div>
 
-<!-- ═══ GALLERY ═══ -->
+<!-- ═══ GALLERY — Life at the WSC ═══ -->
 <section class="section section--light">
   <div style="text-align:center; max-width:520px; margin:0 auto 3rem" class="reveal">
     <div class="section-tag" style="justify-content:center">Gallery</div>
     <h2 class="section-title">Life at the WSC</h2>
   </div>
-  <div class="photo-grid-4 reveal">
-    <div class="photo-item wide"><img src="assets/images/frontiers-bangkok-global.jpg" alt="Frontiers India at the Bangkok Global Round — with medals and trophies" loading="lazy"></div>
-    <div class="photo-item"><img src="assets/images/wsc-directors-stage.jpg" alt="Frontiers directors at Bangkok Global Round" loading="lazy"></div>
-    <div class="photo-item"><img src="assets/images/wsc-kuala-lumpur.jpg" alt="Frontiers students at Kuala Lumpur" loading="lazy"></div>
-    <div class="photo-item"><img src="assets/images/wsc-students-dinner.jpg" alt="Frontiers India students at WSC dinner" loading="lazy"></div>
-    <div class="photo-item"><img src="assets/images/wsc-regional-champion.jpg" alt="Regional Round Champions" loading="lazy"></div>
+
+  <!-- Row 1 — FIX 2: wsc-directors-stage & wsc-kuala-lumpur match wide image (16/9) -->
+  <div class="photo-grid-4 reveal" style="align-items:stretch">
+    <div class="photo-item wide" style="aspect-ratio:16/9">
+      <img src="assets/images/frontiers-bangkok-global.jpg" alt="Frontiers India at the Bangkok Global Round — with medals and trophies" loading="lazy">
+    </div>
+    <div class="photo-item" style="aspect-ratio:16/9">
+      <img src="assets/images/wsc-directors-stage.jpg" alt="Frontiers directors at Bangkok Global Round" loading="lazy">
+    </div>
+<!--    <div class="photo-item" style="aspect-ratio:16/9">
+      <img src="assets/images/wsc-kuala-lumpur.jpg" alt="Frontiers students at Kuala Lumpur" loading="lazy">
+    </div>
+    <div class="photo-item">
+      <img src="assets/images/wsc-students-dinner.jpg" alt="Frontiers India students at WSC dinner" loading="lazy">
+    </div>
+    <div class="photo-item">
+      <img src="assets/images/wsc-regional-champion.jpg" alt="Regional Round Champions" loading="lazy">
+    </div>
+ -->   
   </div>
+
+  <!-- Row 2 -->
   <div class="photo-grid-4 reveal" style="margin-top:1rem">
-  <div class="photo-item"><img src="assets/images/wsc-yale-ball.jpg" alt="Yale Ball celebration — students dancing" loading="lazy"></div>
-  <div class="photo-item"><img src="assets/images/wsc-india-banner.jpg" alt="WSC India banner — students walk in" loading="lazy"></div>
-  <div class="photo-item"><img src="assets/images/wsc-greenwood-regional.jpg" alt="Greenwood High Regional Round" loading="lazy"></div>
-  <div class="photo-item"><img src="assets/images/wsc-greenwood-winners.jpg" alt="Greenwood High WSC Regional Round winners" loading="lazy"></div>
+    <div class="photo-item"><img src="assets/images/wsc-yale-ball.jpg" alt="Yale Ball celebration — students dancing" loading="lazy"></div>
+    <div class="photo-item"><img src="assets/images/wsc-india-banner.jpg" alt="WSC India banner — students walk in" loading="lazy"></div>
+    <div class="photo-item"><img src="assets/images/wsc-greenwood-regional.jpg" alt="Greenwood High Regional Round" loading="lazy"></div>
+    <div class="photo-item"><img src="assets/images/wsc-greenwood-winners.jpg" alt="Greenwood High WSC Regional Round winners" loading="lazy"></div>
   </div>
 </section>
 
@@ -493,12 +688,105 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2024 Frontiers Education. All rights reserved.</p>
+    <p>&copy; 2024 Frontiers Education. All rights reserved.</p>
     <div class="social-links"><a href="https://www.instagram.com/wscind" target="_blank" rel="noopener" title="Instagram">ig</a></div>
   </div>
 </footer>
 
-</div>
+</div><!-- /.page-wrap -->
+
 <script src="assets/js/main.js"></script>
+<script>
+/* ═══ TESTIMONIAL CAROUSEL SCRIPT — FIX: slide 1 card at a time, show all 6 ═══ */
+(function () {
+  const track    = document.getElementById('tcarouselTrack');
+  const wrap     = document.getElementById('tcarouselWrap');
+  const btnPrev  = document.getElementById('tcarouselPrev');
+  const btnNext  = document.getElementById('tcarouselNext');
+  const dotsWrap = document.getElementById('tcarouselDots');
+  if (!track) return;
+
+  const cards      = Array.from(track.children);
+  const totalCards = cards.length;
+  let current      = 0;
+  let autoTimer    = null;
+
+  function visibleCount() {
+    if (window.innerWidth <= 640) return 1;
+    if (window.innerWidth <= 900) return 2;
+    return 3;
+  }
+
+  /* Total slide steps = total cards minus visible window */
+  function totalSteps() {
+    return totalCards - visibleCount() + 1;
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    const steps = totalSteps();
+    for (let i = 0; i < steps; i++) {
+      const d = document.createElement('button');
+      d.className = 'tcarousel-dot' + (i === current ? ' active' : '');
+      d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function updateDots() {
+    Array.from(dotsWrap.children).forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  /* Slide ONE card at a time */
+  function goTo(index) {
+    const steps = totalSteps();
+    current = Math.max(0, Math.min(index, steps - 1));
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const gap       = 24; /* 1.5rem */
+    const offset    = current * (cardWidth + gap);
+    track.style.transform = `translateX(-${offset}px)`;
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current >= steps - 1;
+    updateDots();
+  }
+
+  btnPrev.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+  btnNext.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+
+  function startAuto() {
+    autoTimer = setInterval(() => {
+      const next = current + 1 < totalSteps() ? current + 1 : 0;
+      goTo(next);
+    }, 5000);
+  }
+  function resetAuto() {
+    clearInterval(autoTimer);
+    startAuto();
+  }
+
+  /* Touch / swipe support */
+  let touchStartX = 0;
+  wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  wrap.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      diff > 0 ? goTo(current + 1) : goTo(current - 1);
+      resetAuto();
+    }
+  });
+
+  function init() {
+    buildDots();
+    goTo(0);
+    startAuto();
+  }
+
+  init();
+  window.addEventListener('resize', () => { buildDots(); goTo(0); });
+})();
+</script>
 </body>
 </html>
