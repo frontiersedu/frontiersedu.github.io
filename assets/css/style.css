@@ -565,37 +565,7 @@ footer {
     height: 160px;
   }
 
-  /* WSC — About Programme: collapse inline 2-col grid */
-  .section--white .wsc-about-grid {
-    display: block !important;
-  }
-  /* Fallback for the inline-style grid div */
-  .section--white > div[style*="grid-template-columns"] {
-    display: block !important;
-  }
-
-  /* WSC — About Programme: collapse photo-grid-2 */
-  .section--white .photo-grid-2 {
-    grid-template-columns: 1fr;
-  }
-  .section--white .photo-grid-2 .photo-item.tall {
-    grid-row: span 1;
-    aspect-ratio: 16/9;
-    min-height: unset;
-    width: 100%;
-    overflow: hidden;
-  }
-  .section--white .photo-grid-2 .photo-item.tall img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-  }
-  .section--white .photo-grid-2 .photo-item {
-    aspect-ratio: 16/9;
-    width: 100%;
-    overflow: hidden;
-  }
+  /* WSC — About Programme: handled in wsc.html via .wsc-about-grid and .wsc-about-photos */
 }
 
 /* ═══════════════════════════════════════════════

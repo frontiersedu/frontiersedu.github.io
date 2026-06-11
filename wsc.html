@@ -88,6 +88,19 @@
 .toc-detail-text h5 { font-size: 0.82rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
 .toc-detail-text p { font-size: 0.84rem; color: rgba(255,255,255,0.55); }
 
+/* About Programme — 2-col layout */
+.wsc-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+/* About Programme — tall photo item */
+.wsc-about-photos .photo-item.tall {
+  aspect-ratio: 3/4;
+  min-height: 320px;
+}
+
 /* ═══ TESTIMONIAL CAROUSEL ═══ */
 .testimonial-carousel-section {
   background: var(--light);
@@ -112,8 +125,6 @@
   transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
-
-/* ── FIX 1: card width + text overflow ── */
 .tcarousel-card {
   background: var(--white);
   border: 1px solid var(--border);
@@ -162,11 +173,7 @@
   align-items: center;
   gap: 0.5rem;
 }
-.tcarousel-cite::before {
-  content: '—';
-  color: var(--gold);
-}
-/* Nav controls */
+.tcarousel-cite::before { content: '—'; color: var(--gold); }
 .tcarousel-controls {
   display: flex;
   align-items: center;
@@ -185,19 +192,9 @@
   display: flex; align-items: center; justify-content: center;
   transition: all 0.25s;
 }
-.tcarousel-btn:hover {
-  background: var(--gold);
-  color: var(--white);
-}
-.tcarousel-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-.tcarousel-dots {
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-}
+.tcarousel-btn:hover { background: var(--gold); color: var(--white); }
+.tcarousel-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.tcarousel-dots { display: flex; gap: 0.4rem; align-items: center; }
 .tcarousel-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
@@ -207,11 +204,7 @@
   transition: all 0.25s;
   padding: 0;
 }
-.tcarousel-dot.active {
-  background: var(--gold);
-  width: 22px;
-  border-radius: 4px;
-}
+.tcarousel-dot.active { background: var(--gold); width: 22px; border-radius: 4px; }
 
 /* Values list */
 .values-list { display: flex; flex-wrap: wrap; gap: 0.7rem; }
@@ -223,41 +216,24 @@
 }
 .value-pill::before { content: '✦'; font-size: 0.6rem; }
 
-/* ═══ GALLERY PLACEHOLDER ═══ */
+/* Gallery placeholder */
 .photo-placeholder {
   aspect-ratio: 4/3;
   background: linear-gradient(135deg, #e8edf5 0%, #d0d8e8 100%);
   border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
   gap: 0.6rem;
   border: 2px dashed rgba(10,22,40,0.15);
-  cursor: pointer;
-  transition: all 0.3s;
-  overflow: hidden;
-  position: relative;
+  cursor: pointer; transition: all 0.3s;
+  overflow: hidden; position: relative;
 }
-.photo-placeholder:hover {
-  background: linear-gradient(135deg, #dde4f0 0%, #c4cfe3 100%);
-  border-color: var(--gold);
-}
+.photo-placeholder:hover { background: linear-gradient(135deg, #dde4f0 0%, #c4cfe3 100%); border-color: var(--gold); }
 .photo-placeholder-icon { font-size: 2.2rem; opacity: 0.45; }
-.photo-placeholder-label {
-  font-size: 0.78rem; font-weight: 600; color: var(--navy);
-  opacity: 0.5; font-family: 'DM Sans', sans-serif;
-  text-align: center; padding: 0 1rem;
-}
-.photo-placeholder-badge {
-  position: absolute; top: 10px; left: 10px;
-  background: var(--gold); color: var(--white);
-  font-size: 0.65rem; font-weight: 700;
-  padding: 3px 9px; border-radius: 20px;
-  font-family: 'DM Sans', sans-serif;
-  letter-spacing: 0.4px; text-transform: uppercase;
-}
+.photo-placeholder-label { font-size: 0.78rem; font-weight: 600; color: var(--navy); opacity: 0.5; font-family: 'DM Sans', sans-serif; text-align: center; padding: 0 1rem; }
+.photo-placeholder-badge { position: absolute; top: 10px; left: 10px; background: var(--gold); color: var(--white); font-size: 0.65rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; font-family: 'DM Sans', sans-serif; letter-spacing: 0.4px; text-transform: uppercase; }
 
+/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .event-grid { grid-template-columns: 1fr; }
   .subjects-grid { grid-template-columns: repeat(2, 1fr); }
@@ -265,6 +241,34 @@
   .journey::before { display: none; }
   .toc-grid { grid-template-columns: 1fr; gap: 3rem; }
   .tcarousel-card { min-width: calc(50% - 0.75rem); max-width: calc(50% - 0.75rem); }
+
+  /* About Programme: stack text + photos vertically */
+  .wsc-about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  /* Reset tall photo to landscape crop so it fits the width */
+  .wsc-about-photos .photo-item.tall {
+    grid-row: span 1;
+    aspect-ratio: 16/9;
+    min-height: unset;
+  }
+  /* All photos in the about grid: full-width landscape */
+  .wsc-about-photos {
+    grid-template-columns: 1fr !important;
+  }
+  .wsc-about-photos .photo-item {
+    aspect-ratio: 16/9 !important;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .wsc-about-photos .photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
 }
 @media (max-width: 640px) {
   .subjects-grid { grid-template-columns: 1fr 1fr; }
@@ -324,7 +328,7 @@
 
 <!-- ═══ WHAT IS WSC ═══ -->
 <section class="section section--white">
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center">
+  <div class="wsc-about-grid">
     <div class="reveal">
       <div class="section-tag">About the Programme</div>
       <h2 class="section-title">A Celebration of Learning Unlike Any Other</h2>
@@ -341,8 +345,8 @@
       </div>
     </div>
     <div class="reveal" style="transition-delay:0.18s">
-      <div class="photo-grid-2" style="gap:0.8rem">
-        <div class="photo-item tall" style="min-height:320px">
+      <div class="photo-grid-2 wsc-about-photos" style="gap:0.8rem">
+        <div class="photo-item tall">
           <img src="assets/images/wsc-india-regional-group.jpg" alt="Frontiers India Regional Round" loading="lazy">
         </div>
         <div class="photo-item" style="aspect-ratio:4/3">
@@ -365,59 +369,52 @@
     <div class="tcarousel-track-wrap" id="tcarouselWrap">
       <div class="tcarousel-track" id="tcarouselTrack">
 
-        <!-- Card 1 -->
         <div class="tcarousel-card">
           <div class="tcarousel-quote">"</div>
           <blockquote>I'm ever so glad to have attended the global WSC in 2021. It was the fulcrum which changed both my university and academic aspirations. Before leading my team I was a prospective engineer destined for only Indian higher education. Today I find myself admitted to premier institutions of liberal arts studies, aspiring to law and political science. Such has been my tryst with Scholars Cup.</blockquote>
           <cite class="tcarousel-cite">Devika Sivaram, Dubai Modern High School &mdash; Yale University '2025</cite>
         </div>
 
-        <!-- Card 2 -->
         <div class="tcarousel-card">
           <div class="tcarousel-quote">"</div>
           <blockquote>WSC taught me that learning doesn't have to be confined to a classroom. Debating with students from 70 countries, exploring ideas across history, science, and art — it opened my mind in ways I never expected. I came back a completely different student.</blockquote>
           <cite class="tcarousel-cite">Arjun Mehta, The Shri Ram School, Delhi &mdash; Global Round, Bangkok 2023</cite>
         </div>
 
-        <!-- Card 3 -->
         <div class="tcarousel-card">
           <div class="tcarousel-quote">"</div>
           <blockquote>The Scholar's Cup gave me friendships that span continents. Our team won gold at the regional round, but the real prize was the confidence I found on stage — debating, performing, competing. Frontiers made every step of it possible for us.</blockquote>
           <cite class="tcarousel-cite">Priya Nair, Greenwood High, Bengaluru &mdash; Regional Champion 2024</cite>
         </div>
 
-        <!-- Card 4 -->
         <div class="tcarousel-card">
           <div class="tcarousel-quote">"</div>
           <blockquote>Walking into Yale for the Tournament of Champions was surreal. I had never imagined standing in one of the world's greatest universities, competing with the best young minds on the planet. WSC didn't just prepare me academically — it showed me what I'm truly capable of.</blockquote>
           <cite class="tcarousel-cite">Rahul Krishnamurthy, DPS International &mdash; Tournament of Champions, Yale 2023</cite>
         </div>
 
-        <!-- Card 5 -->
         <div class="tcarousel-card">
           <div class="tcarousel-quote">"</div>
           <blockquote>I had never debated before WSC. Now I can argue both sides of almost any topic with confidence. The programme pushed me out of my comfort zone in the best way. If you're on the fence — just do it. You will not regret it.</blockquote>
           <cite class="tcarousel-cite">Aanya Sharma, Step By Step School, Noida &mdash; Global Round, Kuala Lumpur 2024</cite>
         </div>
 
-        <!-- Card 6 -->
         <div class="tcarousel-card">
           <div class="tcarousel-quote">"</div>
           <blockquote>WSC connected me with students who think differently, challenge ideas, and genuinely love learning. Those friendships are my most treasured takeaway. I travelled to three countries, earned medals in four subjects, and grew more than I thought possible in a single year.</blockquote>
           <cite class="tcarousel-cite">Ishaan Verma, Pathways World School, Gurgaon &mdash; Global Round 2022 &amp; 2023</cite>
         </div>
 
-      </div><!-- /.tcarousel-track -->
-    </div><!-- /.tcarousel-track-wrap -->
+      </div>
+    </div>
 
-    <!-- Controls -->
     <div class="tcarousel-controls">
       <button class="tcarousel-btn" id="tcarouselPrev" aria-label="Previous testimonial">&#8592;</button>
       <div class="tcarousel-dots" id="tcarouselDots"></div>
       <button class="tcarousel-btn" id="tcarouselNext" aria-label="Next testimonial">&#8594;</button>
     </div>
 
-  </div><!-- /.testimonial-carousel-section -->
+  </div>
 
 </section>
 
@@ -612,7 +609,6 @@
     <h2 class="section-title">Life at the WSC</h2>
   </div>
 
-  <!-- Row 1 — FIX 2: wsc-directors-stage & wsc-kuala-lumpur match wide image (16/9) -->
   <div class="photo-grid-4 reveal" style="align-items:stretch">
     <div class="photo-item wide" style="aspect-ratio:16/9">
       <img src="assets/images/frontiers-bangkok-global.jpg" alt="Frontiers India at the Bangkok Global Round — with medals and trophies" loading="lazy">
@@ -620,19 +616,8 @@
     <div class="photo-item" style="aspect-ratio:16/9">
       <img src="assets/images/wsc-directors-stage.jpg" alt="Frontiers directors at Bangkok Global Round" loading="lazy">
     </div>
-<!--    <div class="photo-item" style="aspect-ratio:16/9">
-      <img src="assets/images/wsc-kuala-lumpur.jpg" alt="Frontiers students at Kuala Lumpur" loading="lazy">
-    </div>
-    <div class="photo-item">
-      <img src="assets/images/wsc-students-dinner.jpg" alt="Frontiers India students at WSC dinner" loading="lazy">
-    </div>
-    <div class="photo-item">
-      <img src="assets/images/wsc-regional-champion.jpg" alt="Regional Round Champions" loading="lazy">
-    </div>
- -->   
   </div>
 
-  <!-- Row 2 -->
   <div class="photo-grid-4 reveal" style="margin-top:1rem">
     <div class="photo-item"><img src="assets/images/wsc-yale-ball.jpg" alt="Yale Ball celebration — students dancing" loading="lazy"></div>
     <div class="photo-item"><img src="assets/images/wsc-india-banner.jpg" alt="WSC India banner — students walk in" loading="lazy"></div>
@@ -698,7 +683,6 @@
 
 <script src="assets/js/main.js"></script>
 <script>
-/* ═══ TESTIMONIAL CAROUSEL SCRIPT — FIX: slide 1 card at a time, show all 6 ═══ */
 (function () {
   const track    = document.getElementById('tcarouselTrack');
   const wrap     = document.getElementById('tcarouselWrap');
@@ -717,11 +701,7 @@
     if (window.innerWidth <= 900) return 2;
     return 3;
   }
-
-  /* Total slide steps = total cards minus visible window */
-  function totalSteps() {
-    return totalCards - visibleCount() + 1;
-  }
+  function totalSteps() { return totalCards - visibleCount() + 1; }
 
   function buildDots() {
     dotsWrap.innerHTML = '';
@@ -741,12 +721,11 @@
     });
   }
 
-  /* Slide ONE card at a time */
   function goTo(index) {
     const steps = totalSteps();
     current = Math.max(0, Math.min(index, steps - 1));
     const cardWidth = cards[0].getBoundingClientRect().width;
-    const gap       = 24; /* 1.5rem */
+    const gap       = 24;
     const offset    = current * (cardWidth + gap);
     track.style.transform = `translateX(-${offset}px)`;
     btnPrev.disabled = current === 0;
@@ -763,28 +742,16 @@
       goTo(next);
     }, 5000);
   }
-  function resetAuto() {
-    clearInterval(autoTimer);
-    startAuto();
-  }
+  function resetAuto() { clearInterval(autoTimer); startAuto(); }
 
-  /* Touch / swipe support */
   let touchStartX = 0;
   wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
   wrap.addEventListener('touchend', e => {
     const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? goTo(current + 1) : goTo(current - 1);
-      resetAuto();
-    }
+    if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1); resetAuto(); }
   });
 
-  function init() {
-    buildDots();
-    goTo(0);
-    startAuto();
-  }
-
+  function init() { buildDots(); goTo(0); startAuto(); }
   init();
   window.addEventListener('resize', () => { buildDots(); goTo(0); });
 })();
