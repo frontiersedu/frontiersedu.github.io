@@ -455,6 +455,11 @@ footer {
   .nav-links, .nav-cta { display: none; }
   .nav-hamburger { display: flex; flex-shrink: 0; }
 
+    /* ✅ ADD HERE — Journey/Timeline Section */
+  #journey > div {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
   /* Sections */
   .section { padding: 70px 5vw; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
