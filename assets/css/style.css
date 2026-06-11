@@ -537,7 +537,9 @@ footer {
 }
 @media (max-width: 900px) {
   .nav-links, .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
+  .nav-hamburger { display: flex; flex-shrink: 0; }
+  .nav { padding: 0 1rem; }
+  .nav-logo img { height: 48px; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .adv-grid { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
