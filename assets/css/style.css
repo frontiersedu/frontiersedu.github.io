@@ -25,7 +25,7 @@ a { text-decoration: none; color: inherit; }
   --text:    #2c2c2c;
   --muted:   #6b7280;
   --border:  rgba(10,22,40,0.1);
-  --nav-h:   80px;
+  --nav-h:   90px; /* ✅ bumped from 80px to fit larger logo */
 }
 
 /* ═══════════════════════════════════════════════
@@ -47,7 +47,7 @@ a { text-decoration: none; color: inherit; }
   display: flex; align-items: center; gap: 0.7rem;
   flex-shrink: 0; margin-right: 2.5rem;
 }
-.nav-logo img { height: 61.6px; width: auto; object-fit: contain; }
+.nav-logo img { height: 77px; width: auto; object-fit: contain; } /* ✅ 25% larger: 61.6 × 1.25 = 77px */
 
 .nav-logo-text {
   font-family: 'Playfair Display', serif;
@@ -451,7 +451,7 @@ footer {
 
   /* Nav — hamburger fix */
   .nav { padding: 0 1rem; }
-  .nav-logo img { height: 48px; }
+  .nav-logo img { height: 60px; } /* ✅ 25% larger: 48 × 1.25 = 60px */
   .nav-links, .nav-cta { display: none; }
   .nav-hamburger { display: flex; flex-shrink: 0; }
 
