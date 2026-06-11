@@ -7,7 +7,10 @@
 <meta name="description" content="Frontiers Education offers world-class enrichment programmes for school students, including the World Scholar's Cup, India's exclusive partner.">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-/* ── HOME-SPECIFIC ── */
+
+/* ═══════════════════════════════════════════
+   HOME-SPECIFIC — HERO
+═══════════════════════════════════════════ */
 .hero {
   min-height: 100vh;
   background: var(--navy);
@@ -47,13 +50,14 @@
 }
 .hero h1 em { font-style: italic; color: var(--gold); }
 .hero-sub {
-  font-size: 1.05rem; color: rgba(255,255,255,0.7);
-  line-height: 1.78; max-width: 500px; font-weight: 300;
+  font-size: 1.05rem; color: rgba(255,255,255,1.0);
+  line-height: 1.78; max-width: 500px; font-weight: 500;
   margin-bottom: 2.2rem;
   animation: fadeUp 0.8s 0.24s ease both;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
 }
 .hero-actions { animation: fadeUp 0.8s 0.36s ease both; }
-
 .hero-stats {
   position: relative; z-index: 2;
   display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
@@ -80,7 +84,9 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Intro two-col */
+/* ═══════════════════════════════════════════
+   HOME-SPECIFIC — WHO WE ARE (INTRO)
+═══════════════════════════════════════════ */
 .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .intro-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .intro-photos .tall { grid-row: span 2; }
@@ -92,7 +98,8 @@
 .intro-photo-3 { aspect-ratio: 4/3; }
 .intro-badge {
   display: inline-flex; align-items: center; gap: 0.8rem;
-  background: var(--navy); color: var(--white);
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
   padding: 1rem 1.4rem; border-radius: 4px; margin-top: 1.5rem;
   border-left: 4px solid var(--gold);
   box-shadow: 0 10px 36px rgba(10,22,40,0.18);
@@ -101,17 +108,98 @@
 .intro-badge span { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--gold); font-weight: 600; display: block; margin-bottom: 0.1rem; }
 .partner-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
 .ptag {
-  background: var(--light); border: 1px solid var(--border);
-  color: var(--navy); font-size: 0.8rem; font-weight: 500;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--white);
+  font-size: 0.8rem; font-weight: 500;
   padding: 0.4rem 0.9rem; border-radius: 2px; transition: all 0.2s;
 }
-.ptag:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.ptag:hover { background: var(--white); color: var(--navy); border-color: var(--white); }
 
+/* ═══════════════════════════════════════════
+   HOME-SPECIFIC — COLLABORATIONS
+═══════════════════════════════════════════ */
+#collaborations {
+  background: #fff;
+  padding: 80px 40px;
+}
+#collaborations .collab-heading {
+  text-align: center;
+  margin-bottom: 50px;
+}
+#collaborations .collab-heading h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #0a0a2e;
+}
+#collaborations .collab-underline {
+  width: 60px;
+  height: 4px;
+  background: #e8a020;
+  margin: 14px auto 0;
+}
+#collaborations .collab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+#collaborations .collab-card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.10);
+  background: #f9f9fc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+#collaborations .collab-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.16);
+}
+#collaborations .collab-img-wrap {
+  padding: 20px 20px 0 20px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+#collaborations .collab-img-wrap img {
+  width: 350px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+#collaborations .collab-body {
+  padding: 20px 26px 28px;
+}
+#collaborations .collab-body h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFC300;
+  margin: 0 0 10px;
+}
+#collaborations .collab-body p {
+  font-size: 0.93rem;
+  line-height: 1.75;
+  color: #444;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding-top: calc(var(--nav-h) + 40px); }
   .hero-stats { margin-top: 2rem; }
   .intro-grid { grid-template-columns: 1fr; gap: 3rem; }
 }
+
 </style>
 </head>
 <body>
@@ -121,7 +209,7 @@
   <a href="index.html" class="nav-logo">
     <img src="assets/images/frontier-logo.png" alt="Frontiers Education">
   </a>
-    <ul class="nav-links">
+  <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="wsc.html">World Scholar's Cup</a></li>
     <li><a href="about.html">Our Story</a></li>
@@ -154,39 +242,49 @@
 
   <div class="hero-content">
     <h1>Learning that<br><em>Transforms</em><br>Young Minds</h1>
-    <p class="hero-sub">Frontiers Education brings world-class enrichment experiences to school students across India: practical, inspiring programmes that go far beyond the classroom.<br /><br />
-      Founded in 2010, we have enabled thousands of students from India to participate in leading academic and enrichment experiences across India, the US, Europe, and Asia.<br /><br />
-      Frontiers Education is the exclusive partner for the World Scholar's Cup in India.
-    </p>
   </div>
 
   <div>
-    <div class="hero-badge">India's Exclusive WSC Partner</div>
-    <div class="hero-stats">
-      <div class="hstat">
-        <div class="hstat-num count-up" data-target="5000" data-suffix="+">5,000+</div>
-        <div class="hstat-label">Students participants each year across India</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-num count-up" data-target="200" data-suffix="+">200+</div>
-        <div class="hstat-label">Participating schools across India</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-num count-up" data-target="12" data-suffix="">12</div>
-        <div class="hstat-label">Regional rounds across India</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-num count-up" data-target="70" data-suffix="+">70+</div>
-        <div class="hstat-label">Countries participate in the World Scholar's Cup Globally</div>
-      </div>
-    </div>
-  </div>  
+  <div class="hero-content">
+    <p class="hero-sub">Frontiers Education brings world-class enrichment experiences to school students across India: practical, inspiring programmes that go far beyond the classroom.</p>
+    <p class="hero-sub">Founded in 2010, we have enabled thousands of students from India to participate in leading academic and enrichment experiences across India, the US, Europe, and Asia.</p>
+    <p class="hero-sub">Frontiers Education is the exclusive partner for the World Scholar's Cup in India.</p>
+  </div>
+  </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══ INTRO ═══ -->
-<section class="section section--white" id="about">
+<!-- ═══ WSC HIGHLIGHT ═══ -->
+<section class="section section--white" id="wsc">
+  <div style="text-align:center; max-width:720px; margin:0 auto 4rem;" class="reveal">
+    <div class="section-tag">Featured Programme</div>
+    <h2 class="section-title">The World Scholar's Cup</h2>
+    <p class="section-sub" style="margin:0 auto 2rem">The World Scholar's Cup is an annual international academic tournament and enrichment program that features essay writing, debates, and quizzes to address real world scenarios. Each year over 50,000 students on six continents participate in the program.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a href="wsc.html" class="btn btn-primary">Explore the Programme</a>
+    </div>
+  </div>
+
+  <div class="photo-grid-4 reveal" style="transition-delay:0.15s">
+    <div class="photo-item"><img src="assets/images/frontiers-bangkok-global.jpg" alt="Frontiers India at Bangkok Global Round" loading="lazy"></div>
+    <div class="photo-item"><img src="assets/images/wsc-regional-champion.jpg" alt="2023 Gurgaon Regional Round Champions" loading="lazy"></div>
+    <div class="photo-item"><img src="assets/images/wsc-1st-place-junior.jpg" alt="1st Place Junior India" loading="lazy"></div>
+    <div class="photo-item"><img src="assets/images/wsc-trophy-stage.jpg" alt="Bangkok Global Round Trophy" loading="lazy"></div>
+  </div>
+
+  <div class="stats-row" style="margin-top:4rem; background: var(--navy); border-radius: 12px; padding: 3rem 2.5rem; box-shadow: 0 10px 40px rgba(10,22,40,0.15);">
+    <div class="stat-item reveal"><div class="stat-num" style="color: var(--gold);">5,000+</div><div class="stat-label" style="color: rgba(255,255,255,0.75);">students participate across India each year</div></div>
+    <div class="stat-item reveal" style="transition-delay:0.08s"><div class="stat-num" style="color: var(--gold);">200+</div><div class="stat-label" style="color: rgba(255,255,255,0.75);">schools represented nationwide</div></div>
+    <div class="stat-item reveal" style="transition-delay:0.16s"><div class="stat-num" style="color: var(--gold);">12</div><div class="stat-label" style="color: rgba(255,255,255,0.75);">regional rounds across India</div></div>
+    <div class="stat-item reveal" style="transition-delay:0.24s"><div class="stat-num" style="color: var(--gold);">70+</div><div class="stat-label" style="color: rgba(255,255,255,0.75);">countries active in the WSC community</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ WHO WE ARE ═══ -->
+<section class="section section--dark">
   <div class="intro-grid">
     <div class="reveal">
       <div class="intro-photos" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
@@ -200,25 +298,14 @@
           <img src="assets/images/wsc-india-flag-yale.jpg" alt="India flag bearer at Yale Tournament of Champions" loading="lazy">
         </div>
       </div>
-      <div class="intro-badge">
-        <div>
-          <span>Exclusive Partner</span>
-          World Scholar's Cup, India
-        </div>
-      </div>
     </div>
 
     <div class="reveal" style="transition-delay:0.18s">
-      <div class="section-tag">Who We Are</div>
-      <h2 class="section-title">Where the Classroom Meets the World</h2>
-      <p class="section-sub">Founded in 2010, Frontiers Education is the exclusive partner for the World Scholar's Cup in India, working with 200+ schools, organizing 12 regional rounds, and reaching 5,000+ students across India each year.</p>
-      <p class="section-sub" style="margin-top:1rem">Our diverse team, with experience spanning event management, education and travel, makes every detail effortless, from visas and flights to on-the-ground arrangements.</p>
-      <div class="partner-tags" style="margin-top:1.5rem">
-        <span class="ptag">🌍 World Scholar's Cup</span>
-        </div>
+      <div class="section-tag section-tag--light">Who We Are</div>
+      <h2 class="section-title section-title--light">People Behind Great Experiences</h2>
+      <p class="section-sub" style="color: rgba(255,255,255,0.75);">Our diverse team combines expertise in event management, education, and travel, ensuring a seamless experience from visas and flights to accommodation and on-the-ground logistics.</p>
       <div class="btn-row">
-        <a href="about.html" class="btn btn-dark">Learn About Us</a>
-        <a href="team.html" class="arrow-link">Meet the Team</a>
+        <a href="team.html" class="arrow-link" style="color: var(--gold); border-bottom-color: var(--gold);">Meet the Team</a>
       </div>
     </div>
   </div>
@@ -226,31 +313,74 @@
 
 <div class="divider"></div>
 
-<!-- ═══ WSC HIGHLIGHT ═══ -->
-<section class="section section--dark" id="wsc">
-  <div style="text-align:center; max-width:720px; margin:0 auto 4rem;" class="reveal">
-    <div class="section-tag section-tag--light">Featured Programme</div>
-    <h2 class="section-title section-title--light">The World Scholar's Cup</h2>
-    <p class="section-sub section-sub--light">Each year thousands of students on six continents celebrate learning, creativity, and friendship through the World Scholar's Cup, the world's most inclusive academic tournament. Frontiers Education is the exclusive India partner in India.</p>
-    <div class="btn-row" style="justify-content:center">
-      <a href="wsc.html" class="btn btn-primary">Explore the Programme</a>
+<!-- ===== COLLABORATIONS SECTION ===== -->
+<section id="collaborations">
+
+  <div class="collab-heading">
+    <h2>Collaborations</h2>
+    <div class="collab-underline"></div>
+  </div>
+
+  <div class="collab-grid">
+
+    <!-- ─── CARD 1: Space University ─── -->
+    <div class="collab-card">
+      <div class="collab-img-wrap">
+        <img src="assets/images/space-university.jpg" alt="Space University @ Space Center Houston">
+      </div>
+      <div class="collab-body">
+        <h3>Space University @ Space Center Houston</h3>
+        <p>Spend five days at NASA's Johnson Space Center, working alongside expert educators on space science, robotics, and engineering challenges inspired by real missions. Through project-based learning, exclusive facility access, and interactions with NASA scientists and astronauts, students gain a deeper understanding of innovation and exploration.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="photo-grid-4 reveal" style="transition-delay:0.15s">
-    <div class="photo-item"><img src="assets/images/frontiers-bangkok-global.jpg" alt="Frontiers India at Bangkok Global Round" loading="lazy"></div>
-    <div class="photo-item"><img src="assets/images/wsc-regional-champion.jpg" alt="2023 Gurgaon Regional Round Champions" loading="lazy"></div>
-    <div class="photo-item"><img src="assets/images/wsc-1st-place-junior.jpg" alt="1st Place Junior India" loading="lazy"></div>
-    <div class="photo-item"><img src="assets/images/wsc-trophy-stage.jpg" alt="Bangkok Global Round Trophy" loading="lazy"></div>
-  </div>
+    <!-- ─── CARD 2: Space Camp ─── -->
+    <div class="collab-card">
+      <div class="collab-img-wrap">
+        <img src="assets/images/space-camp.jpg" alt="Space Camp @ U.S. Space & Rocket Center">
+      </div>
+      <div class="collab-body">
+        <h3>Space Camp @ U.S. Space &amp; Rocket Center</h3>
+        <p>Train like an astronaut through mission simulations, rocket launches, advanced training devices, and hands-on STEM activities at the U.S. Space &amp; Rocket Center. Designed for students aged 9–18, the programme develops leadership, teamwork, and problem-solving skills in a dynamic and highly interactive environment.</p>
+      </div>
+    </div>
 
-  <div class="stats-row" style="margin-top:4rem">
-    <div class="stat-item reveal"><div class="stat-num">5,000+</div><div class="stat-label">Students participants from India each year</div></div>
-    <div class="stat-item reveal" style="transition-delay:0.08s"><div class="stat-num">200+</div><div class="stat-label">Participating schools across India</div></div>
-    <div class="stat-item reveal" style="transition-delay:0.16s"><div class="stat-num">12</div><div class="stat-label">Regional rounds across India</div></div>
-    <div class="stat-item reveal" style="transition-delay:0.24s"><div class="stat-num">70+</div><div class="stat-label">Countries participate in the World Scholar's Cup Globally</div></div>
-  </div>
+    <!-- ─── CARD 3: Camp Kennedy Space Center ─── -->
+    <div class="collab-card">
+      <div class="collab-img-wrap">
+        <img src="assets/images/kennedy-space-center.jpg" alt="Camp Kennedy Space Center">
+      </div>
+      <div class="collab-body">
+        <h3>Camp Kennedy Space Center</h3>
+        <p>Explore the home of America's most iconic space missions through exclusive tours, astronaut experiences, and engineering design challenges at NASA's Kennedy Space Center. From launch pads and mission control facilities to the Space Shuttle Atlantis, students discover the history, technology, and future of human spaceflight.</p>
+      </div>
+    </div>
+
+    <!-- ─── CARD 4: Euro Space Camp ─── -->
+    <div class="collab-card">
+      <div class="collab-img-wrap">
+        <img src="assets/images/euro-space-camp.jpg" alt="Euro Space Camp">
+      </div>
+      <div class="collab-body">
+        <h3>Euro Space Camp</h3>
+        <p>Explore the frontiers of science, space, and discovery through a ten-day immersive programme spanning Belgium, France, and Switzerland. From astronaut training and rocket building to a behind-the-scenes visit to CERN, students gain unforgettable STEM experiences while exploring some of Europe's most iconic destinations.</p>
+      </div>
+    </div>
+
+    <!-- ─── CARD 5: Foróige Leadership for Life ─── -->
+    <div class="collab-card">
+      <div class="collab-img-wrap">
+        <img src="assets/images/foroige.jpg" alt="Foróige Leadership for Life">
+      </div>
+      <div class="collab-body">
+        <h3>Foróige Leadership for Life</h3>
+        <p>Develop the mindset and skills of an effective leader at Ireland's renowned Foróige International Youth Leadership Conference. Endorsed by UNESCO, this immersive programme combines leadership training, global collaboration, and personal development to inspire the next generation of changemakers.</p>
+      </div>
+    </div>
+
+  </div><!-- /collab-grid -->
 </section>
+<!-- ===== END COLLABORATIONS ===== -->
 
 <div class="divider"></div>
 
