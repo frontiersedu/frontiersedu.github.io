@@ -233,6 +233,14 @@
 .photo-placeholder-label { font-size: 0.78rem; font-weight: 600; color: var(--navy); opacity: 0.5; font-family: 'DM Sans', sans-serif; text-align: center; padding: 0 1rem; }
 .photo-placeholder-badge { position: absolute; top: 10px; left: 10px; background: var(--gold); color: var(--white); font-size: 0.65rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; font-family: 'DM Sans', sans-serif; letter-spacing: 0.4px; text-transform: uppercase; }
 
+
+/* ── Override rows from 4 in style.css to 3. ── */
+
+.stats-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .event-grid { grid-template-columns: 1fr; }
@@ -309,7 +317,8 @@
     <h1>The World<br>Scholar's <em>Cup</em></h1>
     <p>A celebration of learning, creativity, and friendship where students compete, collaborate, and discover new strengths. </p>
     <p>&nbsp;</p>
-    <p>Frontiers Education is the exclusive partner for the World Scholar's Cup in India.</p>
+    <p>Frontiers Education is the exclusive partner of the World Scholar's Cup in India.</p>
+    <p>&nbsp;</p>
     <div class="btn-row">
       <a href="contact.html" class="btn btn-primary">Register Interest</a>
       <a href="#events" class="btn btn-outline">The Four Events in the World Scholar's Cup</a>
@@ -425,8 +434,7 @@
   <div class="stats-row">
     <div class="stat-item reveal"><div class="stat-num">70+</div><div class="stat-label">Countries &amp; Regions</div></div>
     <div class="stat-item reveal" style="transition-delay:0.08s"><div class="stat-num">100+</div><div class="stat-label">Regional Rounds Each Year</div></div>
-    <div class="stat-item reveal" style="transition-delay:0.16s"><div class="stat-num">3</div><div class="stat-label">Age Divisions for All Levels</div></div>
-    <div class="stat-item reveal" style="transition-delay:0.24s"><div class="stat-num">&#8734;</div><div class="stat-label">Teams Per School Allowed</div></div>
+    <div class="stat-item reveal" style="transition-delay:0.16s"><div class="stat-num">2</div><div class="stat-label">Age Divisions for All Levels</div></div>
   </div>
 </section>
 
@@ -606,7 +614,7 @@
 <section class="section section--light">
   <div style="text-align:center; max-width:520px; margin:0 auto 3rem" class="reveal">
     <div class="section-tag" style="justify-content:center">Photo Gallery</div>
-    <h2 class="section-title">Life at the WSC</h2>
+    <h2 class="section-title">Inspiring Moments, Lasting Impact</h2>
   </div>
 
   <div class="photo-grid-4 reveal" style="align-items:stretch">
@@ -633,7 +641,7 @@
   <div class="reveal">
     <div class="section-tag section-tag--light" style="justify-content:center">Ready to Join?</div>
     <h2 class="section-title section-title--light" style="margin-bottom:1rem">Start Your WSC Journey Today</h2>
-    <p class="section-sub section-sub--light" style="margin:0 auto 2.5rem">Frontiers Education is India's exclusive partner for the World Scholar's Cup. Get in touch and we'll help your school register for the next regional round.</p>
+    <p class="section-sub section-sub--light" style="margin:0 auto 2.5rem">Frontiers Education is the exclusive partner of the World Scholar's Cup in India.<br />Get in touch and we'll help your school register for the next regional round.</p>
     <a href="contact.html" class="btn btn-primary">Contact Us</a>
   </div>
 </section>
@@ -646,12 +654,11 @@
       <p>Global experiential learning programmes designed to supplement school education through practical experiences that teach, motivate, and inspire children to discover their passions.</p>
     </div>
     <div class="footer-col">
-      <h5>Programme</h5>
+      <h5>The World Scholar’s Cup</h5>
       <ul>
-        <li><a href="wsc.html">World Scholar's Cup</a></li>
-        <li><a href="wsc.html#events">The Four Events in the World Scholar's Cup</a></li>
+        <li><a href="wsc.html#events">Four Academic Events</a></li>
+        <li><a href="wsc.html#subjects">Six Subject Areas</a></li>
         <li><a href="wsc.html#toc">Tournament of Champions</a></li>
-        <li><a href="wsc.html#subjects">Subjects</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -659,8 +666,6 @@
       <ul>
         <li><a href="about.html">Our Story</a></li>
         <li><a href="team.html">Our Team</a></li>
-        <li><a href="about.html#values">Values</a></li>
-        <li><a href="about.html#partners">Partners</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -674,7 +679,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&copy; 2024 Frontiers Education. All rights reserved.</p>
+    <p>© 2026 Frontiers Education. All rights reserved.</p>
     <div class="social-links"><a href="https://www.instagram.com/wscind" target="_blank" rel="noopener" title="Instagram">ig</a></div>
   </div>
 </footer>
