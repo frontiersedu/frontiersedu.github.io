@@ -19,12 +19,8 @@
   padding: calc(var(--nav-h) + 60px) 5vw 80px;
   gap: 4rem;
 }
-.hero-bg {
-  position: absolute; inset: 0; z-index: 0;
-}
-.hero-slide {
-  position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease;
-}
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
 .hero-slide.active { opacity: 1; }
 .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
 .hero-slide::after {
@@ -54,7 +50,7 @@
   line-height: 1.78; max-width: 500px; font-weight: 500;
   margin-bottom: 2.2rem;
   animation: fadeUp 0.8s 0.24s ease both;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   letter-spacing: 0.5px;
 }
 .hero-actions { animation: fadeUp 0.8s 0.36s ease both; }
@@ -68,8 +64,7 @@
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 6px; padding: 1.8rem;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
+  backdrop-filter: blur(10px); transition: all 0.3s;
 }
 .hstat:hover { background: rgba(255,255,255,0.1); border-color: rgba(232,160,32,0.3); transform: translateY(-4px); }
 .hstat-num {
@@ -98,8 +93,7 @@
 .intro-photo-3 { aspect-ratio: 4/3; }
 .intro-badge {
   display: inline-flex; align-items: center; gap: 0.8rem;
-  background: rgba(255,255,255,0.08);
-  color: var(--white);
+  background: rgba(255,255,255,0.08); color: var(--white);
   padding: 1rem 1.4rem; border-radius: 4px; margin-top: 1.5rem;
   border-left: 4px solid var(--gold);
   box-shadow: 0 10px 36px rgba(10,22,40,0.18);
@@ -110,8 +104,7 @@
 .ptag {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.15);
-  color: var(--white);
-  font-size: 0.8rem; font-weight: 500;
+  color: var(--white); font-size: 0.8rem; font-weight: 500;
   padding: 0.4rem 0.9rem; border-radius: 2px; transition: all 0.2s;
 }
 .ptag:hover { background: var(--white); color: var(--navy); border-color: var(--white); }
@@ -192,7 +185,7 @@
 }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — HOME PAGE
 ═══════════════════════════════════════════ */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding-top: calc(var(--nav-h) + 40px); }
@@ -205,7 +198,6 @@
 <body>
 
 <!-- ═══ NAV ═══ -->
-
 <nav class="nav">
   <a href="index.html" class="nav-logo">
     <img src="assets/images/frontier-logo.png" alt="Frontiers Education">
@@ -219,6 +211,7 @@
   <a href="contact.html" class="nav-cta">Contact Us</a>
   <div class="nav-hamburger"><span></span><span></span><span></span></div>
 </nav>
+
 <nav class="mobile-nav">
   <a href="index.html">Home</a>
   <a href="wsc.html">World Scholar's Cup</a>
@@ -226,7 +219,6 @@
   <a href="team.html">Our Team</a>
   <a href="contact.html" class="m-cta">Contact Us</a>
 </nav>
-
 
 <div class="page-wrap">
 
@@ -238,17 +230,13 @@
     <div class="hero-slide"><img src="assets/images/wsc-1st-place-junior.jpg" alt="1st Place Junior — Frontiers India" loading="lazy"></div>
     <div class="hero-slide"><img src="assets/images/frontiers-bangkok-global.jpg" alt="Frontiers India at Bangkok Global Round" loading="lazy"></div>
   </div>
-
   <div class="hero-content">
     <h1>Learning that<br><em>Transforms</em><br>Young Minds</h1>
   </div>
-
-  <div>
   <div class="hero-content">
     <p class="hero-sub">Frontiers Education brings world-class enrichment experiences to school students across India: practical, inspiring programmes that go far beyond the classroom.</p>
     <p class="hero-sub">Founded in 2010, we have enabled thousands of students from India to participate in leading academic and enrichment experiences across India, the US, Europe, and Asia.</p>
-    <p class="hero-sub">Frontiers Education is the exclusive partner for the World Scholar's Cup in India</p>
-  </div>
+    <p class="hero-sub">Frontiers Education is the exclusive partner for the World Scholar's Cup in India.</p>
   </div>
 </section>
 
@@ -266,6 +254,7 @@
     </div>
   </div>
 
+  <!-- ✅ FIX: photo-grid-4 is now properly indented inside section; width+box-sizing handled in style.css -->
   <div class="photo-grid-4 reveal" style="transition-delay:0.15s">
     <div class="photo-item"><img src="assets/images/frontiers-bangkok-global.jpg" alt="Frontiers India at Bangkok Global Round" loading="lazy"></div>
     <div class="photo-item"><img src="assets/images/wsc-regional-champion.jpg" alt="2023 Gurgaon Regional Round Champions" loading="lazy"></div>
@@ -273,6 +262,7 @@
     <div class="photo-item"><img src="assets/images/wsc-trophy-stage.jpg" alt="Bangkok Global Round Trophy" loading="lazy"></div>
   </div>
 
+  <!-- ✅ FIX: stats-row properly indented inside section with width+box-sizing -->
   <div class="stats-row" style="margin-top:4rem; width:100%; box-sizing:border-box; background:var(--navy); border-radius:12px; padding:3rem 2.5rem; box-shadow:0 10px 40px rgba(10,22,40,0.15);">
     <div class="stat-item reveal">
       <div class="stat-num" style="color:var(--gold);">5,000+</div>
@@ -312,13 +302,12 @@
         </div>
       </div>
     </div>
-
     <div class="reveal" style="transition-delay:0.18s">
       <div class="section-tag section-tag--light">Who We Are</div>
       <h2 class="section-title section-title--light">People Behind Great Experiences</h2>
-      <p class="section-sub" style="color: rgba(255,255,255,0.75);">Our diverse team combines expertise in event management, education, and travel, ensuring a seamless experience from visas and flights to accommodation and on-the-ground logistics.</p>
+      <p class="section-sub" style="color:rgba(255,255,255,0.75);">Our diverse team combines expertise in event management, education, and travel, ensuring a seamless experience from visas and flights to accommodation and on-the-ground logistics.</p>
       <div class="btn-row">
-        <a href="team.html" class="arrow-link" style="color: var(--gold); border-bottom-color: var(--gold);">Meet the Team</a>
+        <a href="team.html" class="arrow-link" style="color:var(--gold);border-bottom-color:var(--gold);">Meet the Team</a>
       </div>
     </div>
   </div>
@@ -336,7 +325,7 @@
 
   <div class="collab-grid">
 
-    <!-- ─── CARD 1: Space University ─── -->
+    <!-- CARD 1 -->
     <div class="collab-card">
       <div class="collab-img-wrap">
         <img src="assets/images/space-university.jpg" alt="Space University @ Space Center Houston">
@@ -347,7 +336,7 @@
       </div>
     </div>
 
-    <!-- ─── CARD 2: Space Camp ─── -->
+    <!-- CARD 2 -->
     <div class="collab-card">
       <div class="collab-img-wrap">
         <img src="assets/images/space-camp.jpg" alt="Space Camp @ U.S. Space & Rocket Center">
@@ -358,7 +347,7 @@
       </div>
     </div>
 
-    <!-- ─── CARD 3: Camp Kennedy Space Center ─── -->
+    <!-- CARD 3 -->
     <div class="collab-card">
       <div class="collab-img-wrap">
         <img src="assets/images/kennedy-space-center.jpg" alt="Camp Kennedy Space Center">
@@ -369,7 +358,7 @@
       </div>
     </div>
 
-    <!-- ─── CARD 4: Euro Space Camp ─── -->
+    <!-- CARD 4 -->
     <div class="collab-card">
       <div class="collab-img-wrap">
         <img src="assets/images/euro-space-camp.jpg" alt="Euro Space Camp">
@@ -380,7 +369,7 @@
       </div>
     </div>
 
-    <!-- ─── CARD 5: Foróige Leadership for Life ─── -->
+    <!-- CARD 5 -->
     <div class="collab-card">
       <div class="collab-img-wrap">
         <img src="assets/images/foroige.jpg" alt="Foróige Leadership for Life">
