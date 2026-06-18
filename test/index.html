@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Djubo Booking Integration</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #333; }
+
+    header {
+      background: #1a2e4a;
+      color: white;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header h1 { font-size: 1.3rem; }
+    header span { font-size: 0.85rem; opacity: 0.7; }
+
+    .container { max-width: 860px; margin: 32px auto; padding: 0 20px; }
+
+    .step-nav {
+      display: flex;
+      gap: 0;
+      margin-bottom: 28px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #d0d7e2;
+    }
+    .step-nav button {
+      flex: 1;
+      padding: 12px 8px;
+      border: none;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.82rem;
+      color: #666;
+      border-right: 1px solid #d0d7e2;
+      transition: background 0.2s;
+    }
+    .step-nav button:last-child { border-right: none; }
+    .step-nav button.active { background: #1a2e4a; color: #fff; font-weight: 600; }
+    .step-nav button.done { background: #e8f4ed; color: #2a7a4b; }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .card h2 { font-size: 1.1rem; margin-bottom: 6px; color: #1a2e4a; }
+    .card p.desc { font-size: 0.88rem; color: #666; margin-bottom: 20px; }
+
+    .form-row { display: flex; gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+    .form-group { flex: 1; min-width: 180px; }
+    label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 5px; color: #444; }
+    input, select, textarea {
+      width: 100%; padding: 9px 12px; border: 1px solid #cdd3dc;
+      border-radius: 6px; font-size: 0.9rem; background: #fafbfc;
+      transition: border 0.2s;
+    }
+    input:focus, select:focus { outline: none; border-color: #1a2e4a; background: #fff; }
+    textarea { resize: vertical; min-height: 70px; }
+
+    .btn {
+      padding: 11px 24px; border: none; border-radius: 6px;
+      font-size: 0.92rem; font-weight: 600; cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: #1a2e4a; color: white; }
+    .btn-primary:hover { background: #253f63; }
+    .btn-secondary { background: #e8edf3; color: #333; }
+    .btn-success { background: #2a7a4b; color: white; }
+    .btn-success:hover { background: #2e8a54; }
+    .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+
+    .response-box {
+      background: #0f1e30;
+      color: #a8d5b0;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      white-space: pre-wrap;
+      max-height: 280px;
+      overflow-y: auto;
+      margin-top: 14px;
+      display: none;
+    }
+    .response-box.visible { display: block; }
+    .response-box.error { color: #f4a4a4; }
+
+    .room-card {
+      border: 1px solid #d0d7e2;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      background: #f9fbfd;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .room-card:hover { border-color: #1a2e4a; }
+    .room-card.selected { border-color: #2a7a4b; background: #f0faf4; }
+    .room-card h3 { font-size: 0.95rem; margin-bottom: 4px; }
+    .room-card .price { font-size: 1.1rem; font-weight: 700; color: #1a2e4a; }
+    .room-card .rate-plan { font-size: 0.8rem; color: #666; }
+    .room-card .badge {
+      display: inline-block; background: #e8f4ed; color: #2a7a4b;
+      border-radius: 4px; padding: 2px 8px; font-size: 0.75rem;
+      font-weight: 600; margin-top: 6px;
+    }
+
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    .status-badge {
+      display: inline-block; padding: 3px 12px; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 700; margin-left: 8px;
+    }
+    .status-badge.success { background: #e8f4ed; color: #2a7a4b; }
+    .status-badge.pending { background: #fff4e0; color: #b36800; }
+    .status-badge.error { background: #fdecea; color: #c0392b; }
+
+    .info-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.88rem; }
+    .info-row:last-child { border: none; }
+    .info-row span:first-child { color: #888; }
+    .info-row span:last-child { font-weight: 600; }
+
+    .loading { display: none; color: #888; font-size: 0.85rem; margin-top: 8px; }
+    .loading.visible { display: block; }
+
+    .notice {
+      background: #fff8e6; border-left: 4px solid #f0a500;
+      padding: 10px 14px; border-radius: 4px; font-size: 0.84rem;
+      color: #7a5200; margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🏨 Djubo Booking Engine</h1>
+    <span>Powered by Djubo Direct API v9</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="notice">
+    ⚠️ <strong>Security Note:</strong> This demo calls the API directly from the browser for testing.
+    In production, route all API calls through your backend server to keep your access token private.
+  </div>
+
+  <!-- Step Navigation -->
+  <div class="step-nav">
+    <button class="active" onclick="goToStep(1)" id="nav-1">1. Search</button>
+    <button onclick="goToStep(2)" id="nav-2">2. Select Room</button>
+    <button onclick="goToStep(3)" id="nav-3">3. Guest Info</button>
+    <button onclick="goToStep(4)" id="nav-4">4. Confirm</button>
+  </div>
+
+  <!-- ===================== STEP 1: SEARCH ===================== -->
+  <div class="step-panel active" id="step-1">
+    <div class="card">
+      <h2>Search Availability</h2>
+      <p class="desc">Enter your stay details to check available rooms and rates.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Check-In Date</label>
+          <input type="date" id="start_date" />
+        </div>
+        <div class="form-group">
+          <label>Check-Out Date</label>
+          <input type="date" id="end_date" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Adults</label>
+          <input type="number" id="adults" value="2" min="1" max="10" />
+        </div>
+        <div class="form-group">
+          <label>Children (ages, comma-separated)</label>
+          <input type="text" id="children" placeholder="e.g. 9,5 or leave blank" />
+        </div>
+        <div class="form-group">
+          <label>Currency</label>
+          <select id="currency">
+            <option value="INR">INR</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkAvailability()">🔍 Check Availability</button>
+      </div>
+      <div class="loading" id="loading-1">⏳ Fetching availability...</div>
+      <div class="response-box" id="response-1"></div>
+    </div>
+  </div>
+
+  <!-- ===================== STEP 2: SELECT ROOM ===================== -->
+  <div class="step-panel" id="step-2">
+    <div class="card">
+      <h2>Select a Room</h2>
+      <p class="desc">Choose a room and rate plan for your stay.</p>
+      <div id="room-list"><p style="color:#888">No rooms loaded yet. Go back and search.</p></div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="goToStep(1)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== STEP 3: GUEST INFO ===================== -->
+  <div class="step-panel" id="step-3">
+    <div class="card">
+      <h2>Guest Information</h2>
+      <p class="desc">Enter guest details to create or update a guest profile.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" id="g_firstName" placeholder="Rahul" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" id="g_lastName" placeholder="Sharma" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" id="g_email" placeholder="rahul@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone *</label>
+          <input type="tel" id="g_phone" placeholder="9876543210 (without ISD)" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Country Code (ISO2)</label>
+          <input type="text" id="g_iso2" value="in" maxlength="2" />
+        </div>
+        <div class="form-group">
+          <label>ISD Code</label>
+          <input type="text" id="g_isd" value="91" />
+        </div>
+        <div class="form-group">
+          <label>Special Requests</label>
+          <input type="text" id="g_special" placeholder="e.g. early check-in" />
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="goToStep(2)">← Back</button>
+        <button class="btn btn-primary" onclick="createGuest()">Save Guest & Continue →</button>
+      </div>
+      <div class="loading" id="loading-3">⏳ Saving guest profile...</div>
+      <div class="response-box" id="response-3"></div>
+    </div>
+  </div>
+
+  <!-- ===================== STEP 4: CONFIRM & BOOK ===================== -->
+  <div class="step-panel" id="step-4">
+    <div class="card">
+      <h2>Booking Summary</h2>
+      <p class="desc">Review your booking details before confirming.</p>
+      <div id="booking-summary"></div>
+    </div>
+
+    <div class="card">
+      <h2>Confirm Booking</h2>
+      <p class="desc">Click below to submit the reservation to Djubo.</p>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="goToStep(3)">← Back</button>
+        <button class="btn btn-success" onclick="submitBooking()">✅ Confirm Booking</button>
+      </div>
+      <div class="loading" id="loading-4">⏳ Submitting booking...</div>
+      <div class="response-box" id="response-4"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+//  CONFIGURATION — replace with your actual values
+// ============================================================
+const CONFIG = {
+  ACCESS_TOKEN:    '13e47bc8-9d8f-4d4a-9804-ab87cff3080e',
+  PARTNER_ID:      '407',
+  PARTNER_HOTEL_CODE: '407',      // Often the same as partner ID — update if different
+  SOURCE_ID:       '100',
+  SUB_SOURCE_ID:   '1001',
+  API_VERSION:     9,
+  BASE_URL:        'https://www.secure-booking-engine.com/djubo-direct',
+  // BASE_URL:     'https://transit.djubo.in/djubo-direct',  // alternative
+};
+
+// ============================================================
+//  STATE
+// ============================================================
+let state = {
+  availability: null,
+  selectedRoomRate: null,
+  selectedRoomType: null,
+  selectedRatePlan: null,
+  guestTrackerId: null,
+  guestData: null,
+};
+
+// ============================================================
+//  HELPERS
+// ============================================================
+function headers() {
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `DJUBO-TOKEN ${CONFIG.ACCESS_TOKEN}`,
+  };
+}
+
+function showResponse(id, data, isError = false) {
+  const el = document.getElementById(id);
+  el.className = 'response-box visible' + (isError ? ' error' : '');
+  el.textContent = JSON.stringify(data, null, 2);
+}
+
+function showLoading(id, show) {
+  document.getElementById(id).className = 'loading' + (show ? ' visible' : '');
+}
+
+function goToStep(n) {
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(`step-${n}`).classList.add('active');
+  document.querySelectorAll('.step-nav button').forEach((b, i) => {
+    b.classList.remove('active');
+    if (i + 1 === n) b.classList.add('active');
+  });
+}
+
+function today(offsetDays = 0) {
+  const d = new Date();
+  d.setDate(d.getDate() + offsetDays);
+  return d.toISOString().split('T')[0];
+}
+
+// Pre-fill today / tomorrow
+document.getElementById('start_date').value = today(1);
+document.getElementById('end_date').value = today(2);
+
+// ============================================================
+//  STEP 1 — CHECK AVAILABILITY
+// ============================================================
+async function checkAvailability() {
+  const start = document.getElementById('start_date').value;
+  const end   = document.getElementById('end_date').value;
+  const adults = parseInt(document.getElementById('adults').value) || 1;
+  const childrenRaw = document.getElementById('children').value.trim();
+  const currency = document.getElementById('currency').value;
+
+  if (!start || !end) { alert('Please select check-in and check-out dates.'); return; }
+  if (start >= end)   { alert('Check-out must be after check-in.'); return; }
+
+  const party = [{ adults }];
+  if (childrenRaw) {
+    const ages = childrenRaw.split(',').map(a => parseInt(a.trim())).filter(a => !isNaN(a));
+    if (ages.length) party[0].children = ages;
+  }
+
+  const payload = {
+    api_version: CONFIG.API_VERSION,
+    source_id:   CONFIG.SOURCE_ID,
+    sub_source_id: CONFIG.SUB_SOURCE_ID,
+    start_date:  start,
+    end_date:    end,
+    party,
+    language:    'en_US',
+    currency,
+    user_country: 'IN',
+    device_type: 'Desktop',
+    multiple_category_allowed: true,
+    query_key:   `djubo_${Date.now()}`,
+    availability_id: crypto.randomUUID(),
+    requested_payload: {
+      categories: {
+        room_type_details: true,
+        rate_plan_details: true,
+        room_rate_details: true,
+        hotel_details: true,
+      },
+      category_modifiers: {
+        partner_booking_data: true,
+        real_time_pricing: true,
+        multiple_room_rates: true,
+        photos: true,
+        text: true,
+      },
+    },
+    hotels: [{ partner_hotel_code: CONFIG.PARTNER_HOTEL_CODE }],
+  };
+
+  showLoading('loading-1', true);
+  try {
+    const res = await fetch(`${CONFIG.BASE_URL}/availability`, {
+      method: 'POST', headers: headers(), body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    state.availability = data;
+    showResponse('response-1', data, !res.ok);
+    if (res.ok) { renderRooms(data); goToStep(2); }
+  } catch (err) {
+    showResponse('response-1', { error: err.message }, true);
+  }
+  showLoading('loading-1', false);
+}
+
+// ============================================================
+//  STEP 2 — RENDER ROOMS
+// ============================================================
+function renderRooms(data) {
+  const container = document.getElementById('room-list');
+
+  // Try to extract hotels from response
+  const hotels = data.hotels || {};
+  let roomRates = [];
+
+  for (const hotelKey in hotels) {
+    const hotel = hotels[hotelKey];
+    const available = hotel.available || hotel;
+    const rr = available.room_rates || available.roomRates || {};
+    const rt = available.room_types || available.roomTypes || {};
+    const rp = available.rate_plans || available.ratePlans || {};
+
+    for (const rrKey in rr) {
+      const rate = rr[rrKey];
+      const roomType = rt[rate.room_type_key] || {};
+      const ratePlan = rp[rate.rate_plan_key] || {};
+      roomRates.push({ key: rrKey, rate, roomType, ratePlan });
+    }
+  }
+
+  if (!roomRates.length) {
+    container.innerHTML = '<p style="color:#888; padding:10px">No available rooms returned. Check response in Step 1.</p>';
+    return;
+  }
+
+  container.innerHTML = roomRates.map((r, i) => {
+    const price = r.rate.line_items
+      ? r.rate.line_items.find(l => l.type === 'rate')?.price?.amount ?? '—'
+      : r.rate.total || r.rate.price || '—';
+    const currency = r.rate.line_items?.[0]?.price?.currency || '';
+
+    return `
+      <div class="room-card" id="room-card-${i}" onclick="selectRoom(${i})">
+        <h3>${r.roomType.name || 'Room Type ' + (i + 1)}</h3>
+        <div class="price">${currency} ${price}</div>
+        <div class="rate-plan">${r.ratePlan.name || 'Standard Rate'}</div>
+        ${r.rate.rooms_remaining ? `<span class="badge">${r.rate.rooms_remaining} rooms left</span>` : ''}
+      </div>`;
+  }).join('');
+
+  // Store for later use
+  state._roomRates = roomRates;
+}
+
+function selectRoom(i) {
+  document.querySelectorAll('.room-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById(`room-card-${i}`).classList.add('selected');
+  const r = state._roomRates[i];
+  state.selectedRoomRate = r.rate;
+  state.selectedRoomType = r.roomType;
+  state.selectedRatePlan = r.ratePlan;
+  state.selectedRoomRateKey = r.key;
+
+  setTimeout(() => goToStep(3), 400);
+}
+
+// ============================================================
+//  STEP 3 — CREATE GUEST
+// ============================================================
+async function createGuest() {
+  const firstName = document.getElementById('g_firstName').value.trim();
+  const lastName  = document.getElementById('g_lastName').value.trim();
+  const email     = document.getElementById('g_email').value.trim();
+  const phone     = document.getElementById('g_phone').value.trim();
+  const iso2      = document.getElementById('g_iso2').value.trim();
+  const isd       = document.getElementById('g_isd').value.trim();
+
+  if (!firstName) { alert('First name is required.'); return; }
+  if (!email && !phone) { alert('Either email or phone is required.'); return; }
+
+  const payload = {
+    api_version:       CONFIG.API_VERSION,
+    source_id:         CONFIG.SOURCE_ID,
+    sub_source_id:     CONFIG.SUB_SOURCE_ID,
+    partner_hotel_code: CONFIG.PARTNER_HOTEL_CODE,
+    guestTrackerId:    -1,      // -1 = create new
+    firstName, lastName, email, phone, iso2, isd,
+  };
+
+  state.guestData = { firstName, lastName, email, phone };
+
+  showLoading('loading-3', true);
+  try {
+    const res = await fetch(`${CONFIG.BASE_URL}/guest-populate`, {
+      method: 'POST', headers: headers(), body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    showResponse('response-3', data, !res.ok);
+    if (res.ok && data.guest_tracker_id) {
+      state.guestTrackerId = data.guest_tracker_id;
+      buildBookingSummary();
+      goToStep(4);
+    }
+  } catch (err) {
+    showResponse('response-3', { error: err.message }, true);
+  }
+  showLoading('loading-3', false);
+}
+
+// ============================================================
+//  STEP 4 — SUMMARY + SUBMIT
+// ============================================================
+function buildBookingSummary() {
+  const g = state.guestData || {};
+  const rt = state.selectedRoomType || {};
+  const rp = state.selectedRatePlan || {};
+  const rr = state.selectedRoomRate || {};
+
+  const start = document.getElementById('start_date').value;
+  const end   = document.getElementById('end_date').value;
+
+  document.getElementById('booking-summary').innerHTML = `
+    <div class="info-row"><span>Guest</span><span>${g.firstName} ${g.lastName}</span></div>
+    <div class="info-row"><span>Email</span><span>${g.email || '—'}</span></div>
+    <div class="info-row"><span>Check-In</span><span>${start}</span></div>
+    <div class="info-row"><span>Check-Out</span><span>${end}</span></div>
+    <div class="info-row"><span>Room</span><span>${rt.name || 'Selected Room'}</span></div>
+    <div class="info-row"><span>Rate Plan</span><span>${rp.name || 'Standard'}</span></div>
+    <div class="info-row"><span>Guest Tracker ID</span><span>${state.guestTrackerId}</span></div>
+  `;
+}
+
+async function submitBooking() {
+  const g = state.guestData || {};
+  const start = document.getElementById('start_date').value;
+  const end   = document.getElementById('end_date').value;
+  const adults = parseInt(document.getElementById('adults').value) || 1;
+  const special = document.getElementById('g_special').value.trim();
+
+  const payload = {
+    api_version:           CONFIG.API_VERSION,
+    source_id:             CONFIG.SOURCE_ID,
+    sub_source_id:         CONFIG.SUB_SOURCE_ID,
+    start_date:            start,
+    end_date:              end,
+    partner_hotel_code:    CONFIG.PARTNER_HOTEL_CODE,
+    multiple_category_allowed: true,
+    reference_id:          crypto.randomUUID(),
+    ip_address:            '0.0.0.0',
+    special_requests:      special || '',
+    customer: {
+      first_name:    g.firstName,
+      last_name:     g.lastName,
+      email:         g.email,
+      phone_number:  g.phone,
+      country:       document.getElementById('g_iso2').value.toUpperCase(),
+    },
+    rooms: [{
+      party: [{ adults }],
+      traveler_first_name: g.firstName,
+      traveler_last_name:  g.lastName,
+    }],
+    final_price_at_booking: { amount: 0, currency: document.getElementById('currency').value },
+    final_price_at_checkout: {
+      amount: state.selectedRoomRate?.total || 0,
+      currency: document.getElementById('currency').value,
+    },
+    partner_data: state.selectedRoomRateKey
+      ? { room_rate_key: state.selectedRoomRateKey }
+      : {},
+  };
+
+  showLoading('loading-4', true);
+  try {
+    const res = await fetch(`${CONFIG.BASE_URL}/booking_submit/`, {
+      method: 'POST', headers: headers(), body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    showResponse('response-4', data, !res.ok);
+
+    if (data.status === 'Success') {
+      document.getElementById('response-4').style.color = '#a8d5b0';
+    }
+  } catch (err) {
+    showResponse('response-4', { error: err.message }, true);
+  }
+  showLoading('loading-4', false);
+}
+</script>
+</body>
+</html>
